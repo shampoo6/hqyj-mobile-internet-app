@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            height: 125px;
+        }
+
+        .box {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+
+            /* 增加过渡动画属性 */
+            transition: all 1s linear;
+
+            /* 设置初始状态 */
+            transform: translateY(0) rotate(0) scale(0.8, 0.8);
+            background-color: pink;
+        }
+
+        /* 声明激活后的第二个状态 */
+        .box.active {
+            transform: translateY(300px) rotate(720deg) scale(1.4, 1.4);
+            background-color: rgb(192, 255, 195);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div> -->
+    </div>
+</body>
+
+<script>
+
+    let container = document.querySelector('.container')
+
+    // 声明盒子的数量
+    let boxCount = 30
+    // 存储盒子的list
+    let boxList = []
+
+    for (let i = 0; i < boxCount; i++) {
+        // 创建新盒子
+        let box = document.createElement('div')
+        box.classList.add('box')
+        // 给盒子增加播放延迟
+        box.style.transitionDelay = i * 0.2 + 's'
+
+
+        container.appendChild(box)
+
+        boxList.push(box)
+    }
+
+    // 鼠标移入，激活动画
+    container.addEventListener('mouseenter', () => {
+        boxList.forEach(box => {
+            box.classList.add('active')
+        })
+    })
+
+    // 鼠标移出，回放动画
+    container.addEventListener('mouseleave', () => {
+        boxList.forEach(box => {
+            box.classList.remove('active')
+        })
+    })
+</script>
+
+</html>

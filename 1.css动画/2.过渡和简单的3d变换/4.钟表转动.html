@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clock {
+            width: 400px;
+            height: 400px;
+            background-color: gray;
+            border-radius: 200px;
+        }
+
+        .bg {
+            width: 360px;
+            height: 360px;
+            background-color: black;
+            border-radius: 180px;
+            position: relative;
+            top: 20px;
+            left: 20px;
+        }
+
+        .time {
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            background-color: rgb(255, 255, 255);
+            position: absolute;
+            top: 10px;
+            left: 174px;
+            transform-origin: center 170px;
+        }
+
+        .hour {
+            width: 30px;
+            height: 80px;
+            background-color: rgb(87, 87, 87);
+
+            position: absolute;
+            left: 165px;
+            top: 100px;
+
+            transform-origin: center bottom;
+            transition: all 0.5s linear;
+        }
+
+        .hour::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px;
+            border-color: transparent transparent rgb(87, 87, 87) transparent;
+            position: relative;
+            top: -36px;
+        }
+
+        .minute {
+            width: 18px;
+            height: 112px;
+            background-color: #fff;
+
+            position: absolute;
+            left: 171px;
+            top: 68px;
+
+            /* transform: rotate(0); */
+            transform-origin: center bottom;
+            transition: all 0.5s linear;
+        }
+
+        .minute::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 9px;
+            border-color: transparent transparent #fff transparent;
+            position: relative;
+            top: -30px;
+        }
+
+        .second {
+            width: 8px;
+            height: 200px;
+            background-color: #f00;
+
+            position: absolute;
+            left: 176px;
+            top: 32px;
+
+            /* 旋转中心 */
+            transform-origin: center 148px;
+            /* transform: rotate(0deg); */
+
+            transition: all 0.5s linear;
+        }
+
+        .second::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4px;
+            border-color: transparent transparent #f00 transparent;
+            position: relative;
+            top: -25px;
+        }
+
+        .cover {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: #f00;
+
+            position: absolute;
+            left: 162px;
+            top: 162px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 时钟div -->
+    <div class="clock">
+        <!-- 表盘 -->
+        <div class="bg">
+            <div class="pointer-container">
+                <!-- 刻度模板 -->
+                <div class="time"></div>
+            </div>
+            <!-- 时针 -->
+            <div class="hour"></div>
+            <!-- 分钟 -->
+            <div class="minute"></div>
+            <!-- 秒针 -->
+            <div class="second"></div>
+            <!-- 指针盖 -->
+            <div class="cover"></div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    // 获取表盘元素
+    let bg = document.querySelector('.pointer-container')
+
+    // 声明html用于存储所有的刻度
+    let html = ''
+
+    // 声明每秒转动的角度常量
+    const deg = 6
+
+    for (let i = 0; i < 60; i++) {
+        // 声明height用于存储每5分钟的刻度的高度的样式
+        let height = ''
+        if (i % 5 === 0) height = '; height: 24px;'
+        // 让刻度旋转
+        // 思路：旋转角度 = i * 每秒旋转的角度
+        let _deg = i * deg
+        html += '<div class="time" style="transform: rotate(' + _deg + 'deg)' + height + '"></div>'
+    }
+
+    bg.innerHTML = html
+
+
+    let hour = 0
+    let minute = 59
+    let second = 55
+
+    // 记录圈数
+    let hRound = 0
+    let mRound = 0
+    let sRound = 0
+
+    let hourEl = document.querySelector('.hour')
+    let minuteEl = document.querySelector('.minute')
+    let secondEl = document.querySelector('.second')
+
+    function run() {
+        // 渲染指针
+        secondEl.style.transform = 'rotate(' + (deg * second + sRound * 360) + 'deg)'
+        minuteEl.style.transform = 'rotate(' + (deg * minute + mRound * 360) + 'deg)'
+        hourEl.style.transform = 'rotate(' + (deg * 5 * hour + hRound * 360) + 'deg)'
+
+        // 进位判断
+        second++
+        if (second >= 60) {
+            second = 0
+            sRound++
+            minute++
+            if (minute >= 60) {
+                minute = 0
+                mRound++
+                hour++
+                if (hour >= 12) {
+                    hRound++
+                    hour = 0
+                }
+            }
+        }
+
+        setTimeout(() => {
+            run()
+        }, 1000)
+    }
+
+    run()
+</script>
+
+</html>

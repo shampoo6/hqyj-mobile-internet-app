@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0
+        }
+
+        .title1 {
+            position: relative;
+            left: -3em;
+            /* 设置过渡动画 */
+            transition: left 1s cubic-bezier(0, 0, 0.38, 1.41);
+        }
+
+        .title2 {
+            text-align: right;
+            position: relative;
+            right: -3em;
+
+            transition: right 1s cubic-bezier(0, 0, 0.38, 1.41) 1s;
+        }
+
+        .title1.active {
+            left: calc(50% - 1.5em);
+        }
+
+        .title2.active {
+            right: calc(50% - 1.5em);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <div class="title1">主标题</div>
+    </h1>
+    <h3>
+        <div class="title2">副标题</div>
+    </h3>
+</body>
+
+<script>
+    // 获取title元素
+    let title1 = document.querySelector('.title1')
+    let title2 = document.querySelector('.title2')
+
+    setTimeout(() => {
+        title1.classList.add('active')
+        title2.classList.add('active')
+    }, 1000)
+</script>
+
+</html>

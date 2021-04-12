@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: pink;
+            position: relative;
+
+            /* 设置过渡动画 */
+            transition: all 3s linear;
+            /* 起始状态left为0 */
+            left: 0;
+        }
+
+        /* 选中同时具备box和active类的元素 */
+        .box.active {
+            left: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>点击按钮来播放和回放动画</h1>
+    <div class="box"></div>
+    <button class="btn">播放</button>
+</body>
+
+<script>
+    let btn = document.querySelector('.btn')
+    let box = document.querySelector('.box')
+
+    // 设置一个指示是否播放动画的布尔值
+    // true 代表播放动画，false 代表回放动画
+    let play = false;
+
+    btn.addEventListener('click', () => {
+        if (play) {
+            box.classList.remove('active')
+            play = false
+            btn.innerText = '播放'
+        } else {
+            box.classList.add('active')
+            play = true
+            btn.innerText = '回放'
+        }
+    })
+</script>
+
+</html>

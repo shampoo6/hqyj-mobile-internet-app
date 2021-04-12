@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            /* 参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition */
+            /* 使用过渡属性 */
+            /* transition: all 2s linear; */
+
+            /* transition复合属性可以拆解成以下属性 */
+
+            /* 过渡属性：声明一个需要产生过渡动画的属性 */
+            /* 可以同时声明多个属性，属性之间用逗号隔开 */
+            /* 待选项：
+                all: 代表所有属性
+                none: 没有任何属性
+             */
+            transition-property: opacity, left;
+
+            /* 补间动画的时长 */
+            transition-duration: 2s;
+
+            /* 补间动画的速度曲线 */
+            /* 带选项：
+                linear: 匀速播放动画
+                ease-in: 慢进匀速出
+                ease-out: 匀速进慢出
+                ease-in-out: 慢进慢出
+                steps(n): 声明有n个过渡阶段
+             */
+            /* transition-timing-function: linear; */
+            /* 除了使用预制带选项，也可以手动赋值如下： */
+            /* transition-timing-function: cubic-bezier(0.03, 0.68, 0.98, 0.3); */
+
+            transition-timing-function: steps(5);
+
+            /* 延迟播放动画的时间 */
+            /* transition-delay: 3s; */
+
+            /* 使用transition属性设置所有的过渡动画属性 */
+            /* 属性顺序如下：过渡属性名 过渡时长 速度曲线 延迟时间 */
+            /* transition: all 2s ease-out 3s; */
+            /* transition: 2s; */
+
+            opacity: 1;
+        }
+
+        .box:hover {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    // 什么是transition？
+    // transition是过渡的意思，将会时元素从一个状态用动画形式过渡到零一个状态
+</script>
+
+</html>
