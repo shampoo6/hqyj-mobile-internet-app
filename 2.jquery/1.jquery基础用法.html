@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<!-- 引入jquery -->
+<script src="./js/jquery.min.js"></script>
+<script>
+    // jquery 使用的方法：
+
+    // 1. 查询并存储元素
+    // 2. 操作元素，包括修改元素样式，绑定事件等
+
+    // console.log($)
+
+    // 通过document.querySelector获取到的 box，是一个dom对象
+    let box = document.querySelector('.box')
+
+    // 获取元素的语法：$(selector)
+    // 通过jquery获取到的对象 $box ，我们称为jquery对象，该对象类似一个数组，其中的数组成员就是dom对象
+    let $box = $('.box')
+
+    console.log(box)
+    console.log($box)
+
+
+    // 操纵元素
+
+    // 设置div高度和背景色
+    // $box.css('height', '100px')
+    // $box.css('background-color', 'red')
+
+    // box.style.height = '100px'
+    // box.style.backgroundColor = 'red'
+
+    // jquery对象的函数总返回自己
+    // 所以可以进行链式调用
+    $box.css('height', '100px').css('background-color', 'red')
+
+</script>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 200px;
+        }
+
+        .btns {
+            display: flex;
+            margin-left: 5px;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background-color: gray;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./img/1-1.png" />
+    <div class="btns">
+        <div class="btn"></div>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script>
+
+    let $btns = $('.btns')
+    let $img = $('img')
+
+
+    // 构造7个按钮
+    let html = ''
+    for (let i = 0; i < 7; i++) {
+        // 构建按钮时，存储对应按钮的索引
+        html += '<div class="btn" i="' + i + '"></div>'
+    }
+    $btns.html(html)
+
+    // 在构造完按钮后，才能获取它
+    let $btn = $('.btn')
+    // 初始第一个按钮的颜色
+    $btn.eq(0).css('background-color', 'orange')
+
+
+    // 声明一个当前选中的图片的索引
+    let currentIndex = 0
+    $img.click(() => {
+        // 重置所有按钮的背景色
+        // 获取上一张图片的索引值
+        $btn.eq(currentIndex).css('background-color', 'gray')
+
+        // 索引自增
+        // 使用模运算限制索引值不超过7，因为有7张图片
+        currentIndex = ++currentIndex % 7
+        // 获取图片路径
+        let num = currentIndex + 1
+        let path = './img/' + num + '-' + num + '.png'
+        $img.attr('src', path)
+
+        // 修改当前按钮的背景色
+        $btn.eq(currentIndex).css('background-color', 'orange')
+    })
+
+    $btn.on('click', function () {
+        // 重置所有按钮的背景色
+        // 获取上一张图片的索引值
+        $btn.eq(currentIndex).css('background-color', 'gray')
+
+        // 获取点击按钮的当前索引值
+        currentIndex = Number($(this).attr('i'))
+
+        // 切换背景色
+        $btn.eq(currentIndex).css('background-color', 'orange')
+
+        // 构造图片路径
+        let num = currentIndex + 1
+        let path = './img/' + num + '-' + num + '.png'
+        $img.attr('src', path)
+    })
+
+</script>
+
+</html>

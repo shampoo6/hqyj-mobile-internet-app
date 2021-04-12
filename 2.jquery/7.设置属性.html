@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 150px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" my-data="true"></div>
+    <!-- <div class="box"></div> -->
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+
+    let $box = $('.box')
+
+    // 读取自定义属性
+
+    let myData = $box.attr('my-data')
+    console.log(myData)
+
+    // 设置属性值
+    $box.attr('src', './img/1.png')
+
+    // 删除属性值
+    $box.removeAttr('my-data')
+
+    // 设置点击事件
+    $box.click(function () {
+        console.log(this)
+        console.log('click')
+    })
+
+</script>
+
+</html>

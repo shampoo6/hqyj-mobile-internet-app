@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation */
+
+        /* animation动画 */
+        /* animation和transition的区别： */
+        /* transition 是通过属性变化，而产生过渡状态，而由浏览器自动创建补间动画 */
+        /* transition 在浏览器上动态修改css属性后，依然可以播放过渡动画 */
+        /* animation的状态是事先定义好的，后续改变css属性也不会播放新的动画 */
+        /* animation的动画状态不止起始状态和结尾状态，可以定义多个状态 */
+
+        /* animation是一个复合属性，由以下属性构成： */
+
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+
+            /* 动画名称 */
+            /* 作用：用于告诉浏览器，该动画应用哪一个动画关键帧序列 */
+            animation-name: box-move;
+
+            /* 动画播放时长 */
+            animation-duration: 1s;
+
+            /* 动画播放的速度曲线 */
+            animation-timing-function: ease-in-out;
+
+            /* 延迟播放的时间 */
+            animation-delay: 0.5s;
+
+            /* 动画播放次数 */
+            /* 带选项：
+                infinite: 无限循环播放
+             */
+            animation-iteration-count: infinite;
+
+            /* 动画播放方向 */
+            /* 带选项：
+                normal：正向播放
+                reverse: 反向播放
+                alternate: 正向播放一次然后反向再播放一次
+                alternate-reverse: 反向播放一次然后正向再播放一次
+             */
+            animation-direction: alternate;
+
+            /* 播放结束后，元素的最终状态模式 */
+            /* 
+                带选项：
+                forwards：动画播放完后，保留最后一帧的状态
+                backwards：动画播放完后，保留第一帧的状态
+                both：动画播放完后，保留第一帧和最后一帧的状态和
+             */
+            animation-fill-mode: backwards;
+
+
+
+            /* 可以定义复合属性，取代上面的所有属性 */
+            /* 赋值顺序，可以参考如下顺序 */
+            /* duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
+            /* duration | timing-function | delay | name */
+            /* duration | name */
+            animation: box-move 2s linear 3s 2 alternate forwards;
+        }
+
+        /* 关键帧：动画播放时的几个关键状态 */
+        /* 序列：有序的队列 */
+
+        /* 定义一个关键帧序列 如下： */
+        /* 使用@keyframes定义关键帧序列，后面参数为：动画名 */
+        @keyframes box-move {
+
+            /* 初始状态 */
+            from {
+                margin-left: 0;
+                font-size: 32px;
+            }
+
+            /* 通过百分比，设置动画播放到这个百分比时的状态 */
+            40% {
+                margin-left: -100px;
+                font-size: 64px;
+            }
+
+            /* 结束状态 */
+            to {
+                margin-left: 600px;
+                font-size: 14px;
+                background-color: green;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">hello world</div>
+</body>
+
+</html>

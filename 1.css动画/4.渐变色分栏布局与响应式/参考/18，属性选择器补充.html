@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*属性选择器*/
+			/*1、属性等于指定值的元素*/
+			/*div[myname='box']{
+				color: red;
+			}*/
+			
+			/*2、属性包含指定值的元素*/
+			/*div[myname*='a']{
+				color: orange;
+			}*/
+			
+			/*3、属性以指定值开头*/
+			/*div[myname^='bo']{
+				border: 1px solid orchid;
+			}*/
+			
+			/*4、属性以指定值结尾*/
+			/*div[myname$='e']{
+				border: 1px solid crimson;
+			}*/
+			
+			/*5、属性以value- 开头的*/
+			/*div[myname|='box']{
+				background: slateblue;
+			}*/
+		</style>
+	</head>
+	<body>
+		<div myname="box">我的属性是box</div>
+		<div myname="box active">我的属性是box active</div>
+		<div myname="bo">我的属性是bo</div>
+		<div myname="bx">我的属性是bx</div>
+		<div myname="ox ace">我的属性是ox ace</div>
+		<div myname="box-active">我的属性是box-active</div>
+	</body>
+</html>

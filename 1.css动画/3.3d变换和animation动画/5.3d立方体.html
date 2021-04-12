@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .scene {
+            height: 1000px;
+            position: relative;
+            left: 200px;
+            top: 200px;
+
+            /* 创建3d空间 */
+            transform-style: preserve-3d;
+            perspective: 1000px;
+
+            /* 设置灭点的位置 */
+            perspective-origin: 150px 150px;
+
+            /* 设置场景旋转的中心 */
+            /* 第三个参数：z轴上的坐标位置 */
+            transform-origin: 150px 150px -150px;
+
+            /* 设置动画初始状态 */
+            transform: rotateX(0) rotateY(0);
+
+            /* 过渡动画 */
+            transition: all 3s linear;
+        }
+
+        .scene.active {
+            transform: rotateX(360deg) rotateY(360deg);
+        }
+
+        .face {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+            opacity: 0.5;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            font-size: 26px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .left {
+            transform-origin: left center;
+            transform: rotateY(90deg);
+            background-color: red;
+        }
+
+        .right {
+            transform-origin: right center;
+            transform: rotateY(-90deg);
+            background-color: greenyellow;
+        }
+
+        .back {
+            transform: translateZ(-300px);
+            background-color: gray;
+        }
+
+        .top {
+            transform-origin: top center;
+            transform: rotateX(-90deg);
+            background-color: blue;
+        }
+
+        .bottom {
+            transform-origin: bottom center;
+            transform: rotateX(90deg);
+            background-color: violet;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scene">
+        <div class="face">前</div>
+        <div class="face back">后</div>
+        <div class="face left">左</div>
+        <div class="face right">右</div>
+        <div class="face top">上</div>
+        <div class="face bottom">下</div>
+    </div>
+</body>
+
+<script>
+    let scene = document.querySelector('.scene')
+    scene.addEventListener('mouseenter', () => {
+        console.log('enter')
+        scene.classList.add('active')
+    })
+    scene.addEventListener('mouseleave', () => {
+        console.log('leave')
+        scene.classList.remove('active')
+    })
+</script>
+
+</html>

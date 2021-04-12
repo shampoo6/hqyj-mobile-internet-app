@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box-list">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box"><span>4</span></div>
+        <div class="box">5</div>
+        <div class="box">6</div>
+    </div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    // index() 查询某个节点在集合中的索引
+    $('.box').index($('.box:nth-child(3)'))
+    // find() 查询某个节点的后代节点
+    $('.box-list').find('span')
+    // closest 查询最近的父节点
+    $('.box:nth-child(3)').closest('.box-list')
+</script>
+
+</html>

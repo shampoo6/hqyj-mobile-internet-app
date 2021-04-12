@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+
+<script>
+    // 获取画布
+    let c = document.querySelector('canvas')
+    let ctx = c.getContext('2d')
+
+    // 绘制填充颜色的矩形
+    ctx.fillRect(200, 225, 100, 50)
+
+    // 绘制镂空矩形
+    ctx.strokeRect(200, 225, 100, 50)
+
+    // 清空画布
+    ctx.clearRect(0, 0, 500, 500)
+</script>
+
+</html>

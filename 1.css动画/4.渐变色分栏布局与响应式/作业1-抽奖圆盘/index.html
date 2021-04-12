@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pan {
+            width: 400px;
+            height: 400px;
+            border-radius: 200px;
+            background-color: #404443;
+            border: 15px solid #b39558;
+
+            box-sizing: border-box;
+            position: relative;
+            transition: all 1.5s ease-in-out;
+            transform: rotate(0);
+        }
+
+        .line {
+            width: 6px;
+            height: 186px;
+            position: absolute;
+            background-color: #b39558;
+            top: -1px;
+            left: 182px;
+            transform-origin: center bottom;
+        }
+
+        img {
+            position: absolute;
+            left: 163px;
+            top: 57px;
+            transform-origin: center 128px;
+        }
+
+        .tip {
+            width: 100px;
+            position: absolute;
+            left: 135px;
+            transform-origin: center 185px;
+        }
+
+        .num,
+        .word {
+            font-size: 20px;
+            color: #b39558;
+            text-align: center;
+        }
+
+        .num {
+            margin-top: 35px;
+        }
+
+        .cover {
+            width: 150px;
+            height: 150px;
+            border-radius: 75px;
+            background-color: #b39558;
+            border: 10px solid black;
+
+            box-sizing: border-box;
+            position: absolute;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .t1,
+        .t2 {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px;
+            border-color: transparent transparent #b39558 transparent;
+            top: -19px;
+        }
+
+        .t2 {
+            border-width: 20px;
+            border-color: transparent transparent black transparent;
+            top: -39px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pan">
+        <!-- <div class="line"></div> -->
+        <!-- <img src="./img/cry.png"/> -->
+        <!-- <div class="tip">
+            <div class="num">1</div>
+            <div class="word">元话费</div>
+        </div> -->
+        <!-- <div class="cover">
+            <div>抽奖</div>
+            <div class="t2"></div>
+            <div class="t1"></div>
+        </div> -->
+    </div>
+</body>
+
+<script>
+    let body = document.body
+    let pan = document.querySelector('.pan')
+    // 存储圆盘旋转的角度
+    let deg = 0
+
+    // 声明抽奖池
+    let pool = [
+        {
+            // 奖金金额
+            money: 0,
+            // 开始角度
+            from: 0,
+            // 结束角度
+            to: 30,
+            // 权重: 权重越大随机到它的概率越大
+            weight: 10
+        },
+        {
+            money: 100,
+            from: 30,
+            to: 60,
+            weight: 1
+        },
+        {
+            money: 3,
+            from: 60,
+            to: 90,
+            weight: 1
+        },
+        {
+            money: 0,
+            from: 90,
+            to: 120,
+            weight: 10
+        },
+        {
+            money: 8,
+            from: 120,
+            to: 150,
+            weight: 1
+        },
+        {
+            money: 2,
+            from: 150,
+            to: 180,
+            weight: 1
+        },
+        {
+            money: 0,
+            from: 180,
+            to: 210,
+            weight: 10
+        },
+        {
+            money: 1,
+            from: 210,
+            to: 240,
+            weight: 1
+        },
+        {
+            money: 2,
+            from: 240,
+            to: 270,
+            weight: 1
+        },
+        {
+            money: 0,
+            from: 270,
+            to: 300,
+            weight: 10
+        },
+        {
+            money: 10,
+            from: 300,
+            to: 330,
+            weight: 1
+        },
+        {
+            money: 5,
+            from: 330,
+            to: 360,
+            weight: 1
+        }
+    ]
+
+    let total = 0
+    // 求出权重和
+    for (let i = 0; i < pool.length; i++) {
+        let reward = pool[i]
+        total += reward.weight
+    }
+    for (let i = 0; i < pool.length; i++) {
+        let reward = pool[i]
+        // 求每个奖品抽中的概率
+        reward.rate = reward.weight / total
+        // console.log(reward.rate)
+    }
+
+    window.addEventListener('load', () => {
+        body.style.height = window.innerHeight + 'px'
+    })
+
+    // 增加动画结束事件
+    pan.addEventListener('transitionend', () => {
+        // 判断中奖
+        let d = deg % 360;
+        for (let i = 0; i < pool.length; i++) {
+            let reward = pool[i]
+            if (d > 360 - reward.to && d <= 360 - reward.from) {
+                alert(reward.money)
+                break;
+            }
+        }
+    })
+
+
+    drawLine()
+    drawReward()
+    drawCover()
+
+
+    // 画线
+    function drawLine() {
+        let html = ''
+        for (let i = 0; i < 12; i++) {
+            html +=
+                '<div class="line" style="transform: rotate(' + 30 * i + 'deg)"></div>'
+        }
+        pan.innerHTML = html
+    }
+
+    // 绘制奖品
+    function drawReward() {
+        pool.forEach((reward, index) => {
+            let deg = 15
+            if (index !== 0) deg += index * 30
+            if (reward.money === 0) {
+                pan.innerHTML += '<img src="./img/cry.png" style="transform: rotate(' + deg + 'deg)"/>'
+            } else {
+                let tip = document.createElement('div')
+                tip.classList.add('tip')
+                tip.style.transform = 'rotate(' + deg + 'deg)'
+                tip.innerHTML =
+                    '<div class="num">' + reward.money + '</div>' +
+                    '<div class="word">元话费</div>'
+                pan.appendChild(tip)
+            }
+        })
+    }
+
+    // 绘制抽奖按钮
+    function drawCover() {
+        let cover = document.createElement('div')
+        cover.classList.add('cover')
+        cover.innerHTML =
+            '<div>抽奖</div>' +
+            '<div class="t2"></div>' +
+            '<div class="t1"></div>'
+        body.appendChild(cover)
+
+
+        // 使用权重进行抽奖
+        cover.addEventListener('click', () => {
+            getReward()
+        })
+
+        // 挑选奖品
+        function getReward() {
+            // debugger
+            // 用于判断，是否随机到了一个奖品
+            let found = false
+            for (let i = 0; i < pool.length; i++) {
+                let reward = pool[i]
+                let r = Math.random()
+                // 判断是否中将
+                if (r < reward.rate) {
+                    console.log(r)
+                    console.log(reward)
+                    found = true
+                    // d 代表让角度归零所需的旋转度数
+                    let d = 360 - deg % 360
+                    // 求出选中奖品需要的旋转角度
+                    let from = 360 - reward.to
+                    let to = 360 - reward.from
+                    let rand = from + Math.floor(Math.random() * (to - from))
+                    // 求出旋转的总角度
+                    d += rand
+                    deg += d
+                    pan.style.transform = 'rotate(' + deg + 'deg)'
+                    break
+                }
+            }
+            // 若奖品都没选中，就再随机一次
+            if (!found) {
+                getReward()
+            }
+        }
+
+        // 添加抽奖按钮事件
+        // cover.addEventListener('click', () => {
+        //     // 随机旋转
+        //     let rand = 360 + Math.floor(Math.random() * 360)
+        //     deg += rand
+        //     pan.style.transform = 'rotate(' + deg + 'deg)'
+        // })
+    }
+</script>
+
+</html>

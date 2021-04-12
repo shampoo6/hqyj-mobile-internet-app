@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 150px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    let $box = $('.box')
+    let box = $box[0]
+
+    // box.onclick = function () {
+    //     console.log('click')
+    // }
+
+    // 给jquery对象绑定事件时，直接调用该事件名称对应的函数
+    // $box.click(function () {
+    //     console.log('click')
+    // })
+
+    $box.mouseenter(function () {
+        console.log('enter')
+    })
+
+    $box.mouseleave(function () {
+        console.log('leave')
+    })
+
+    // 手动触发事件
+    // setTimeout(() => {
+    //     // 3秒后，通过代码触发鼠标点击事件
+    //     $box.click()
+    // }, 3000)
+
+    // 使用 on 函数绑定事件
+    // let clickHandler = () => {
+    //     console.log('click1')
+    // }
+    // let clickHandler2 = () => {
+    //     console.log('click2')
+    // }
+    // $box.on('click', clickHandler).on('click', clickHandler2)
+
+    // 使用 off 解绑事件
+    // $box.off('click') // 如果只写一个参数，会解绑所有的对应事件
+    // $box.off('click', clickHandler)
+
+
+    // 使用 one 函数，可以让绑定的事件只触发一次
+    $box.one('click', () => {
+        console.log('click')
+    })
+
+
+
+    // 页面加载完成事件
+    $(function () {
+        console.log('页面加载完成')
+    })
+</script>
+
+</html>

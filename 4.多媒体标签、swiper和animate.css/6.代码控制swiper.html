@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css" />
+    <style>
+        .swiper-container {
+            width: 500px;
+            height: 400px;
+            border: 1px solid red;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: chocolate;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .swiper-wrapper>.swiper-slide:nth-child(1) {
+            background-color: red
+        }
+
+        .swiper-wrapper>.swiper-slide:nth-child(2) {
+            background-color: green
+        }
+
+        .swiper-wrapper>.swiper-slide:nth-child(3) {
+            background-color: blue
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 滚动播放的容器 -->
+    <!-- 必须写 swiper-container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <!-- 滚动元素写在swiper-wrapper中 -->
+        <!-- 必须写 swiper-wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <!-- If we need pagination -->
+        <!-- 分页工具 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <!-- 前进后退导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+    </div>
+
+    <div>
+        <button class="next">下一个</button>
+        <button class="pre">上一个</button>
+        <button class="to">跳转</button>
+    </div>
+</body>
+<script src="./js/swiper-bundle.min.js"></script>
+<script>
+    // https://swiperjs.com/swiper-api#methods-and-properties
+    const swiper = new Swiper('.swiper-container', {
+        // If we need pagination
+        // 分页配置
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
+        // 导航配置
+        navigation: {
+            // nextEl: '.box',
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    // 给 swiper 添加 滑动元素
+    // swiper.addSlide(0, '<div class="swiper-slide">hello world</div>')
+
+    let div = document.createElement('div')
+    div.classList.add('swiper-slide')
+    div.innerHTML = '这是新增slide'
+
+    swiper.appendSlide(div)
+
+    // 删除 slide
+    swiper.removeSlide(0)
+
+
+    let nextBtn = document.querySelector('.next')
+    nextBtn.addEventListener('click', () => {
+        // 滑动到下一个元素
+        swiper.slideNext(1000)
+    })
+    
+    let preBtn = document.querySelector('.pre')
+    preBtn.addEventListener('click', () => {
+        // 滑动到上一个元素
+        swiper.slidePrev(3000)
+    })
+
+    let toBtn = document.querySelector('.to')
+    toBtn.addEventListener('click', () => {
+        // 滑动到指定位置
+        swiper.slideTo(2, 3000)
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/animate.min.css" />
+    <style>
+        .txt {
+            color: red;
+            text-align: center;
+            font-size: 64px;
+            margin-top: 100px;
+
+            /* 使用该属性，可以让元素下的所有动画都应用该播放时长 */
+            /* --animate-duration: 5s; */
+            /* 延迟播放 */
+            /* --animate-delay: 0.9s; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 在需要播放动画的元素上加上动画样式名称，例如：animate__backOutDown -->
+    <!-- 需要加上 animate__animated 类 动画才能播放 -->
+    <!-- <div class="txt animate__fadeOut animate__animated"> -->
+    <div class="txt">
+        <!-- 叠加动画可以使用div多播过一层动画 -->
+        <div>
+            <!-- <div class="animate__slideOutDown animate__animated"> -->
+            Hello World
+        </div>
+    </div>
+    <div>
+        <button>播放</button>
+    </div>
+</body>
+<script>
+    // animate.css是一个动画样式文件，使用该样式文件，可以轻松的播放一些常用动画
+
+    // 官网：https://animate.style/
+
+    // 动态追加动画
+    let btn = document.querySelector('button')
+    btn.addEventListener('click', () => {
+        let txt = document.querySelector('.txt')
+        // animate__delay-5s 可以延迟5s播放
+        // txt.children[0].classList.add('animate__fadeOut', 'animate__animated')
+
+        // txt.classList.add('animate__slideOutDown', 'animate__animated', 'animate__delay-5s')
+        // 可以通过以下类来改变播放速度
+        // animate__faster 500ms
+        // animate__fast 800ms
+        // animate__slower 3s
+        // animate__slow 2s
+        // txt.classList.add('animate__slideOutDown', 'animate__animated', 'animate__faster')
+
+
+
+        // 修改播放次数
+        // animate__repeat-2 循环指定次数
+        // animate__repeat-3
+        // animate__repeat-4
+        // animate__infinite 无限循环
+        txt.classList.add('animate__slideOutDown', 'animate__animated', 'animate__infinite')
+    })
+</script>
+
+</html>

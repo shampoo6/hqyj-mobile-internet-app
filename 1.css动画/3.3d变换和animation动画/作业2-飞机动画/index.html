@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* background-color: #ffd200; */
+            background-color: #1b1b1b;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+        .ball {
+            width: 140px;
+            height: 140px;
+            background-color: #ffd200;
+            border-radius: 70px;
+
+            animation: scale-up 1s linear forwards;
+        }
+
+        @keyframes scale-up {
+            from {
+                transform: scale(1, 1)
+            }
+
+            to {
+                transform: scale(20, 20);
+            }
+        }
+
+        .plane {
+            width: 800px;
+            height: 400px;
+            position: relative;
+        }
+
+        .plane img {
+            position: absolute;
+        }
+
+        .plane img:nth-of-type(2) {
+            top: 205px;
+            left: 106px;
+
+            animation: keep-rotate 0.5s linear infinite;
+        }
+
+        @keyframes keep-rotate {
+            from {
+                transform: rotate(0);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .keep-fly {
+            animation: keep-fly 3s linear infinite;
+        }
+
+        @keyframes keep-fly {
+            from {
+                transform: translateX(0) translateY(0);
+            }
+
+            25% {
+                transform: translateX(-15px) translateY(-15px);
+            }
+
+            75% {
+                transform: translateX(15px) translateY(15px);
+            }
+
+            to {
+                transform: translateX(0) translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img class="face" src="./img/loading-Home.gif" />
+    <!-- <div class="ball"></div> -->
+    <!-- <div class="plane">
+        <img src="./img/plane.svg" />
+        <img src="./img/propeller.svg" />
+    </div> -->
+</body>
+
+<script>
+    let body = document.body
+    let face = document.querySelector('.face')
+
+    window.addEventListener('load', () => {
+        // 窗口加载完成后，设置body高度为窗口的高度
+        body.style.height = window.innerHeight + 'px'
+    })
+
+    face.addEventListener('dblclick', () => {
+        console.log('dblclick')
+        // 删除face ，加入背景小球，播放放大动画
+        body.innerHTML = '<div class="ball"></div>'
+        // 删除ball 设置body背景色
+        let ball = document.querySelector('.ball')
+        ball.addEventListener('animationend', () => {
+            body.style.backgroundColor = '#ffd200'
+
+            // 小球动画播放结束后，插入飞机
+            body.innerHTML =
+                '<div class="plane">' +
+                '<img src="./img/plane.svg" />' +
+                '<img src="./img/propeller.svg" />' +
+                '</div>'
+
+            let plane = document.querySelector('.plane')
+            // 确定飞机飞入时的位置
+            let startX = window.innerWidth * 0.5 + plane.clientWidth * 0.5
+            plane.style.transform = 'translateX(' + startX + 'px)'
+            setTimeout(() => {
+                plane.style.transition = 'all 1s linear'
+                plane.style.transform = 'translateX(0)'
+                // 水平飞入屏幕以后，让他持续上下移动
+                plane.addEventListener('transitionend', () => {
+                    plane.classList.add('keep-fly')
+                })
+            }, 100)
+        })
+    })
+</script>
+
+</html>

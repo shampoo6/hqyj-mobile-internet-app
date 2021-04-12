@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+<script>
+    let c = document.querySelector('canvas')
+    let ctx = c.getContext('2d')
+
+    // 修改画笔颜色
+    ctx.fillStyle = '#00f'
+
+
+
+    // 设置移动速度
+    let v = {
+        x: 2,
+        y: 1
+    }
+
+    // 盒子的坐标
+    let point = {
+        x: 0,
+        y: 0
+    }
+
+    drawBox()
+
+    function drawBox() {
+        // 清空画布
+        ctx.clearRect(0, 0, 500, 500)
+        ctx.fillRect(point.x, point.y, 50, 50)
+        setTimeout(() => {
+            // 根据速度改变坐标
+            point.x += v.x
+            point.y += v.y
+            drawBox()
+        }, 100)
+    }
+
+</script>
+
+</html>

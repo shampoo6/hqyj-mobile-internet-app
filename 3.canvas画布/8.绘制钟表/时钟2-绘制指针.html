@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 1px solid rebeccapurple;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+
+<script>
+    let canvas = document.querySelector('canvas')
+    let ctx = canvas.getContext('2d')
+
+    // 定义时间
+    let h = 10
+    let m = 45
+    let s = 30
+
+    drawBg()
+    // 绘制时针
+    drawPointer('#00f', 15, 100, h * 30)
+    // 绘制分针
+    drawPointer('#0f0', 12, 130, m * 6)
+    // 绘制秒针
+    drawPointer('#f00', 8, 150, s * 6)
+    // 绘制指针盖子
+    drawCover()
+
+    // 绘制表盘
+    function drawBg() {
+        changePen(ctx, '#000', 1)
+        // 绘制圆
+        ctx.beginPath()
+        ctx.arc(250, 250, 200, 0, (Math.PI / 180) * 360)
+        ctx.stroke()
+
+        // 绘制刻度
+        for (let i = 0; i < 60; i++) {
+            changePen(ctx, '#000', 1)
+            // 绘制第一个刻度
+            ctx.beginPath()
+            ctx.moveTo(250, 250)
+            // 计算刻度的角度
+            let deg = 6 * i
+            // 通过角度计算画线的目标点
+            let target = getTarget(250, 250, 200, deg)
+            ctx.lineTo(target.x, target.y)
+            ctx.stroke()
+            changePen(ctx, '#fff', 10)
+            ctx.beginPath()
+            ctx.moveTo(250, 250)
+            // 计算白线的半径
+            let r = i % 5 === 0 ? 160 : 180
+            target = getTarget(250, 250, r, deg)
+            ctx.lineTo(target.x, target.y)
+            ctx.stroke()
+        }
+    }
+
+    // 绘制指针
+    function drawPointer(color, size, r, deg) {
+        // 绘制时针
+        changePen(ctx, color, size)
+        // let deg = h * 30
+        let target = getTarget(250, 250, r, deg)
+        ctx.beginPath()
+        ctx.moveTo(250, 250)
+        ctx.lineTo(target.x, target.y)
+        ctx.stroke()
+    }
+
+    // 绘制指针盖子
+    function drawCover() {
+        changeFill(ctx, '#f00')
+        ctx.beginPath()
+        ctx.arc(250, 250, 20, 0, 2 * Math.PI)
+        ctx.fill()
+    }
+
+    // 更换画笔
+    function changePen(ctx, color, size) {
+        ctx.lineWidth = size
+        ctx.strokeStyle = color
+    }
+
+    // 更换油漆桶
+    function changeFill(ctx, color) {
+        ctx.fillStyle = color
+    }
+
+    // x: 圆心的横坐标
+    // y: 圆心的纵坐标
+    // r: 圆半径
+    // deg: 旋转角度
+    // 前提：12点方向为0度
+    function getTarget(x, y, r, deg) {
+        let deltaX = Math.sin((Math.PI / 180) * deg) * r
+        let deltaY = Math.cos((Math.PI / 180) * deg) * r
+        return {
+            x: x + deltaX,
+            y: y - deltaY
+        }
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .scene {
+            height: 1000px;
+            position: relative;
+            left: 400px;
+            top: 350px;
+
+            /* 创建3d空间 */
+            transform-style: preserve-3d;
+            perspective: 1000px;
+
+            /* 设置灭点的位置 */
+            /* perspective-origin: 150px 150px; */
+
+            /* 设置场景旋转的中心 */
+            /* 第三个参数：z轴上的坐标位置 */
+            transform-origin: 150px 150px -150px;
+
+            /* 设置动画初始状态 */
+            transform: rotateX(0) rotateY(0);
+
+            /* 过渡动画 */
+            /* transition: all 3s linear; */
+        }
+
+        .scene.active {
+            transform: rotateX(360deg) rotateY(360deg);
+        }
+
+        .face {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+            opacity: 0.5;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            font-size: 26px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+
+        .left {
+            transform-origin: left center;
+            /* transform: rotateY(90deg); */
+            background-color: red;
+
+            /* animation: left 1.5s linear forwards; */
+        }
+
+        .left.active {
+            animation: left 1.5s linear forwards;
+        }
+
+        @keyframes left {
+            from {
+                transform: rotateY(0);
+            }
+
+            to {
+                transform: rotateY(-90deg);
+            }
+        }
+
+        .right {
+            transform-origin: right center;
+            /* transform: rotateY(-90deg); */
+            background-color: greenyellow;
+
+        }
+
+        .right.active {
+            animation: right 1.5s linear forwards;
+        }
+
+        @keyframes right {
+            from {
+                transform: rotateY(0);
+            }
+
+            to {
+                transform: rotateY(90deg);
+            }
+        }
+
+        .front.active {
+            animation: front 1.5s linear forwards;
+        }
+
+        @keyframes front {
+            from {
+                transform: translateZ(0);
+            }
+
+            to {
+                transform: translateZ(300px);
+            }
+        }
+
+        .back {
+            /* transform: translateZ(-300px); */
+            background-color: gray;
+        }
+
+        .top {
+            transform-origin: top center;
+            /* transform: rotateX(-90deg); */
+            background-color: blue;
+
+        }
+
+        .top.active {
+            animation: top 1.5s linear forwards;
+        }
+
+        @keyframes top {
+            from {
+                transform: rotateX(0);
+            }
+
+            to {
+                transform: rotateX(90deg);
+            }
+        }
+
+        .bottom {
+            transform-origin: bottom center;
+            /* transform: rotateX(90deg); */
+            background-color: violet;
+
+        }
+
+        .bottom.active {
+            animation: bottom 1.5s linear forwards;
+        }
+
+        @keyframes bottom {
+            from {
+                transform: rotateX(0);
+            }
+
+            to {
+                transform: rotateX(-90deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scene">
+        <div class="face front">前</div>
+        <div class="face back">后</div>
+        <div class="face left">左</div>
+        <div class="face right">右</div>
+        <div class="face top">上</div>
+        <div class="face bottom">下</div>
+    </div>
+</body>
+
+<script>
+
+    let frontEl = document.querySelector('.front')
+    let leftEl = document.querySelector('.left')
+    let rightEl = document.querySelector('.right')
+    let topEl = document.querySelector('.top')
+    let bottomEl = document.querySelector('.bottom')
+
+    // 声明数组，按播放顺序存储元素
+    let arr = [leftEl, rightEl, topEl, bottomEl, frontEl]
+
+    // 声明索引的变量
+    let index = 0
+
+    // 参考：https://developer.mozilla.org/zh-CN/docs/Web/Events
+
+    // 绑定动画播放完成事件
+    // leftEl.addEventListener('animationend', () => {
+    //     index++
+    //     let el = arr[index]
+    //     // 绑定动画完成事件
+    //     el.addEventListener('animationend', () => {
+    //         console.log('end')
+    //     })
+    //     el.classList.add('active')
+    // })
+
+    // // 激活动画
+    // leftEl.classList.add('active')
+
+
+    function playAnimation(currentIndex) {
+        // 获取播放动画的元素
+        let el = arr[currentIndex]
+
+        // 如果元素不存在就停止运行
+        if (!el) return
+
+        // 给el绑定动画播放完成事件
+        el.addEventListener('animationend', () => {
+            playAnimation(++currentIndex)
+        })
+
+        // 激活动画
+        el.classList.add('active')
+    }
+
+    // 调用函数 播放完整动画
+    playAnimation(0)
+
+</script>
+
+</html>

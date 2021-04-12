@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div>
+        <button>隐藏</button>
+        <button>显示</button>
+        <button>开关</button>
+        <button>渐出</button>
+        <button>渐入</button>
+        <button>开关2</button>
+    </div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    // 参考：https://www.jquery123.com/category/effects/
+
+    let $box = $('.box')
+    let $btn1 = $('button').eq(0)
+    let $btn2 = $('button').eq(1)
+    let $btn3 = $('button').eq(2)
+    let $btn4 = $('button').eq(3)
+    let $btn5 = $('button').eq(4)
+    let $btn6 = $('button').eq(5)
+
+    $btn1.on('click', () => {
+        $box.hide() // 调用hide函数，隐藏元素
+    })
+    $btn2.on('click', () => {
+        $box.show() // 调用show函数，显示元素
+    })
+    $btn3.on('click', () => {
+        $box.toggle() // 调用toggle函数，让元素在隐藏和显示之间来回切换
+    })
+    $btn4.on('click', () => {
+        $box.fadeOut() // 调用fadeOut函数，渐出元素
+    })
+    $btn5.on('click', () => {
+        $box.fadeIn() // 调用fadeIn函数，渐入元素
+    })
+    $btn6.on('click', () => {
+        $box.fadeToggle() // 调用fadeToggle函数，进入渐出的开关
+    })
+</script>
+
+</html>

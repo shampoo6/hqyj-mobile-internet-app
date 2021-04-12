@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+
+<script>
+    // 获取画布
+    let c = document.querySelector('canvas')
+    let ctx = c.getContext('2d')
+
+    // 已知图片路径来绘制图片
+    let src = './img/sample.png'
+
+    // 创建img标签
+    let img = document.createElement('img')
+    img.src = src
+
+    // 绑定图片加载完成事件
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0)
+        // 删除img标签
+        img.remove()
+    }
+
+    // 插入图片
+    document.body.appendChild(img)
+</script>
+
+</html>

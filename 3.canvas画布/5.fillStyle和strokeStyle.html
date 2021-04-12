@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+<script>
+    let c = document.querySelector('canvas')
+    let ctx = c.getContext('2d')
+
+    // fillStyle 可以修改所有使用fill的函数所填充的颜色
+    ctx.fillStyle = '#f00'
+
+    ctx.fillRect(0, 0, 50, 50)
+
+    ctx.beginPath()
+    ctx.arc(250, 250, 200, (Math.PI / 180) * (-90), (Math.PI / 180) * (90))
+    ctx.fill()
+
+    // strokeStyle 可以修改所有stroke函数的描边颜色
+    ctx.strokeStyle = 'violet'
+    ctx.lineWidth = 10
+    ctx.strokeRect(50, 0, 50, 50)
+
+    ctx.beginPath()
+    ctx.arc(250, 250, 200, (Math.PI / 180) * (90), (Math.PI / 180) * (270))
+    ctx.stroke()
+</script>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../css/animate.min.css" />
+    <style>
+        body,
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper-container {
+            height: 100%;
+        }
+
+        .swiper-slide {
+            background-image: url(./img/full_bg.png);
+            position: relative;
+        }
+
+        .big-bg {
+            height: 100%;
+            width: 100%;
+            transform: scale(2, 2);
+            display: none;
+        }
+
+        .big-bg.active {
+            animation: bg-in 1s linear forwards;
+        }
+
+        @keyframes bg-in {
+            from {
+                transform: scale(2, 2);
+            }
+
+            to {
+                transform: scale(1, 1);
+            }
+        }
+
+        .human {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        .txt {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .title-bg {
+            height: 40px;
+            width: 166px;
+            background-color: #6542a4;
+            border-radius: 35px;
+
+            padding: 10px 20px;
+            position: absolute;
+            top: 135px;
+        }
+
+        .title {
+            font-size: 32px;
+            color: white;
+            font-weight: bolder;
+
+            position: absolute;
+            top: 142px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <img class="big-bg bg1" src="./img/big_bg.png">
+                <img class="human" src="./img/human.png">
+                <!-- 文本内容 -->
+                <div class="txt">
+                    <!-- <div class="title-bg"></div> -->
+                    <div class="title-bg animate__delay-1s"></div>
+                    <div class="title-bg animate__delay-1s"></div>
+                    <div class="title animate__delay-2s">这是title</div>
+                    <!-- <div class="animate__zoomIn animate__animated animate__slower">这是title</div> -->
+                    <div class="content animate__delay-2s">这是内容</div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="big-bg bg2" src="./img/big_bg.png">
+            </div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="../js/swiper-bundle.min.js"></script>
+<script>
+    function $(selector) {
+        return document.querySelector(selector)
+    }
+
+    // 获取元素
+    let bg1 = $('.bg1')
+    let bg2 = $('.bg2')
+    let human = $('.human')
+    let titleBgLeft = $('.title-bg:nth-child(1)')
+    let titleBgRight = $('.title-bg:nth-child(2)')
+    let title = $('.title')
+    let content = $('.content')
+
+
+    let swiper = new Swiper('.swiper-container', {
+        direction: 'vertical'
+    })
+
+    // 添加滑动结束事件
+    swiper.on('slideChangeTransitionEnd', () => {
+        console.log('transition end')
+        console.log(swiper.activeIndex)
+        if (swiper.activeIndex === 1) {
+            play2()
+        } else if (swiper.activeIndex === 0) {
+            play1()
+        }
+    })
+
+    play1()
+
+    // 播放首页动画
+    function play1() {
+        reset()
+        bg1.style.display = 'block'
+        bg1.classList.add('active')
+        human.classList.add('animate__slideInUp', 'animate__animated')
+        titleBgLeft.classList.add('animate__fadeInLeft', 'animate__animated')
+        titleBgRight.classList.add('animate__fadeInRight', 'animate__animated')
+        title.classList.add('animate__zoomIn', 'animate__animated')
+        content.classList.add('animate__backInLeft', 'animate__animated')
+    }
+
+    // 播放第二屏动画
+    function play2() {
+        reset()
+        bg2.style.display = 'block'
+        bg2.classList.add('active')
+    }
+
+    // 重置第一屏动画
+    function reset() {
+        bg1.style.display = 'none'
+        bg1.classList.remove('active')
+        human.classList.remove('animate__slideInUp', 'animate__animated')
+        titleBgLeft.classList.remove('animate__fadeInLeft', 'animate__animated')
+        titleBgRight.classList.remove('animate__fadeInRight', 'animate__animated')
+        title.classList.remove('animate__zoomIn', 'animate__animated')
+        content.classList.remove('animate__backInLeft', 'animate__animated')
+
+        bg2.style.display = 'none'
+        bg2.classList.remove('active')
+    }
+</script>
+
+</html>

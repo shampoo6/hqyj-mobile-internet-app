@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+<script>
+    let c = document.querySelector('canvas')
+    let ctx = c.getContext('2d')
+
+    // 绘制扇形的角度
+    let r = {
+        from: 0,
+        to: 30
+    }
+
+    // 声明速度，每一帧增加多少度
+    let v = 6
+
+    draw()
+
+    // 绘制扇形
+    function draw() {
+        // 清空画布
+        ctx.clearRect(0, 0, 500, 500)
+        ctx.beginPath()
+        ctx.moveTo(250, 250)
+        ctx.arc(250, 250, 200, (Math.PI / 180) * r.from, (Math.PI / 180) * r.to)
+        ctx.fill()
+        setTimeout(() => {
+            // 根据速度，移动扇形
+            r.from += v
+            r.to += v
+            draw()
+        }, 100)
+    }
+</script>
+
+</html>

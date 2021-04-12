@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        .box.active {
+            animation: move 2s linear forwards;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(200px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div>
+        <button>play</button>
+    </div>
+</body>
+
+<script>
+    let toggle = false
+    let btn = document.querySelector('button')
+    let box = document.querySelector('.box')
+
+    btn.addEventListener('click', () => {
+        if(!toggle) {
+            toggle = true
+            box.classList.add('active')
+        } else {
+            toggle = false
+            box.classList.remove('active')
+        }
+    })
+</script>
+
+</html>

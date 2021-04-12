@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+<script>
+    let c = document.querySelector('canvas')
+    let ctx = c.getContext('2d')
+
+    // 定义屋顶的点
+    let p1 = {
+        x: 250,
+        y: 120
+    }
+
+    let p2 = {
+        x: 150,
+        y: 200
+    }
+
+    let p3 = {
+        x: 350,
+        y: 200
+    }
+
+    // 房屋左上角位置
+    let roofWidth = 20
+    // 房屋左上角坐标
+    let p4 = {
+        x: p2.x + roofWidth,
+        y: p2.y
+    }
+    // 房屋宽度
+    let houseWidth = p3.x - p2.x - 2 * roofWidth
+    // 房屋高度
+    let houseHeight = 100
+
+    // 增加画笔宽度
+    ctx.lineWidth = 10
+    // 开始绘制屋顶
+    ctx.beginPath()
+    ctx.moveTo(p1.x, p1.y)
+    ctx.lineTo(p2.x, p2.y)
+    ctx.lineTo(p3.x, p3.y)
+    ctx.lineTo(p1.x, p1.y)
+    ctx.closePath()
+    ctx.stroke()
+
+    // 方法一：使用矩形绘制房屋
+    // ctx.strokeRect(p4.x, p4.y, houseWidth, houseHeight)
+
+    // 方法二：使用线段绘制房屋
+    ctx.beginPath()
+    ctx.moveTo(p4.x, p4.y)
+    ctx.lineTo(p4.x, p4.y + houseHeight)
+    ctx.lineTo(p4.x + houseWidth, p4.y + houseHeight)
+    ctx.lineTo(p4.x + houseWidth, p4.y)
+    ctx.stroke()
+
+
+    // 画门
+
+    // 设置门的宽高
+    let doorWidth = 42
+    let doorHeight = 60
+    // 门左上角坐标
+    let p5 = {
+        x: p1.x - doorWidth * 0.5,
+        y: p2.y + (houseHeight - doorHeight)
+    }
+
+    ctx.fillRect(p5.x, p5.y, doorWidth, doorHeight)
+</script>
+
+</html>

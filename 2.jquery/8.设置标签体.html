@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="p"><span style="color: red">hello</span>&nbsp;world</div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    let $p = $('.p')
+
+    // 通过jquery读取和设置标签体
+
+    // 读取标签体
+    console.log($p.html())
+    console.log($p.text())
+
+    // 设置标签体
+    $p.html('<h1>这是title</h1>')
+    $p.text('<h1>这是title</h1>')
+</script>
+
+</html>

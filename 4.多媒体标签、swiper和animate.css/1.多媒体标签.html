@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 产看媒体标签的方法： https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement -->
+    <!-- 参考 https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video -->
+    <!-- controls 代表控制视频播放的控制器 -->
+    <!-- source 代表视频源 -->
+    <video width="600" controls>
+        <source src="./video/oceans.mp4" />
+    </video>
+
+    <!-- https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio -->
+    <!-- src 代表音频源 -->
+    <audio src="./audio/a4.mp3"></audio>
+
+    <!-- 自定义控制器 -->
+    <div>
+        <button class="play">播放</button>
+        <button class="pause">暂停</button>
+        当前时间：<span class="current-time"></span>
+        总时间：<span class="total-time"></span>
+        <input class="inp" /><button class="go-to">跳转到此时间</button>
+        <button class="v-up">音量+</button>
+        <button class="v-down">音量-</button>
+        <button class="muted">静音</button>
+    </div>
+
+    <!-- 使用自动播放+静音，能实现自动播放的效果 -->
+    <video width="600" autoplay muted>
+        <source src="./video/oceans.mp4" />
+    </video>
+</body>
+
+<script>
+    let video = document.querySelector('video')
+    let audio = document.querySelector('audio')
+    let playBtn = document.querySelector('.play')
+    let pauseBtn = document.querySelector('.pause')
+    let currentTime = document.querySelector('.current-time')
+    let totalTime = document.querySelector('.total-time')
+    let inp = document.querySelector('.inp')
+    let goTo = document.querySelector('.go-to')
+    let vUp = document.querySelector('.v-up')
+    let vDown = document.querySelector('.v-down')
+    let muted = document.querySelector('.muted')
+
+    // 若直接播放媒体资源，将获得一个异常，告诉你浏览器不允许在用户未经允许的请款下自动播放
+    // video.play()
+
+    document.addEventListener('click', () => {
+        // 由于不能直接自动播放，所以需要一个事件触发播放
+        // video.play()
+        // audio.play()
+    })
+
+    // 由于浏览器安全策略的原因，在5s内，激活页面后才能正常播放
+    // setTimeout(() => {
+    //     video.play()
+    // }, 5000)
+
+
+
+
+    playBtn.addEventListener('click', () => {
+        video.play() // 播放
+        // 获取媒体的总时间
+        totalTime.innerHTML = video.duration
+    })
+    pauseBtn.addEventListener('click', () => {
+        video.pause() // 暂停
+    })
+
+    setInterval(() => {
+        currentTime.innerHTML = video.currentTime
+    }, 1000)
+
+    goTo.addEventListener('click', () => {
+        video.currentTime = Number(inp.value) // 跳转播放时间
+    })
+
+    // 音量加减
+    // 取值范围是0~1
+    vUp.addEventListener('click', () => {
+        video.volume = Math.min(video.volume + 0.1, 1)
+    })
+    vDown.addEventListener('click', () => {
+        video.volume = Math.max(video.volume - 0.1, 0)
+    })
+
+    // 静音与恢复
+    muted.addEventListener('click', () => {
+        video.muted = !video.muted
+    })
+</script>
+
+</html>

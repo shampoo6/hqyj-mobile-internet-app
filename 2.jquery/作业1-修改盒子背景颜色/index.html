@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <button color="rgb(221, 19, 19)">红色</button>
+    <button color="rgb(59, 221, 19)">绿色</button>
+    <button color="rgb(19, 214, 221)">蓝色</button>
+    <button color="rgb(208, 221, 19)">黄色</button>
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+
+<script src="../js/jquery.min.js"></script>
+<script>
+    // 声明一个用于存储颜色值的变量
+    let pickedColor
+
+    // 给按钮绑定点击事件
+    $('button').click(function () {
+        pickedColor = $(this).attr('color')
+        console.log(pickedColor)
+    })
+
+    // 给方块绑定点击事件
+    $('.box').click(function () {
+        if (!pickedColor) return
+        $(this).css('background-color', pickedColor)
+    })
+
+    
+
+</script>
+
+</html>

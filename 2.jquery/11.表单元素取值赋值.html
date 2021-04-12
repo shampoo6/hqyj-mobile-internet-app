@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <div><label>姓名: <input name="name" /></label></div>
+        <div>性别:
+            <label>男：<input type="radio" name="sex" value="male" /></label>
+            <label>女：<input type="radio" name="sex" value="female" checked /></label>
+        </div>
+        <div><label>部门:
+                <select name="dep">
+                    <option value="it">IT部</option>
+                    <option value="hr">人事部</option>
+                    <option value="ec">行政部</option>
+                </select>
+            </label></div>
+        <div>
+            <label>简介：<textarea name="desc"></textarea></label>
+        </div>
+        <button>提交</button>
+    </form>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    let $btn = $('form button')
+    let $name = $('form input[name=name]')
+    let $sex = $('form input[name=sex]')
+    let $dep = $('form select[name=dep]')
+    let $desc = $('form textarea[name=desc]')
+
+    let sex = 'female'
+
+    $btn.on('click', (ev) => {
+        ev.stopPropagation()
+        ev.preventDefault()
+        // 获取表单元素的值
+        console.log($name.val())
+        console.log(sex)
+        console.log($dep.val())
+        console.log($desc.val())
+    })
+
+    // 添加 change 事件捕获单选按钮切换选择的时候
+    $sex.change(function () {
+        sex = $(this).val()
+    })
+
+    // 使用jquery给表单元素赋值
+    $name.val('请输入')
+    $dep.val('hr')
+    $desc.val('这是一段简介')
+
+    // 设置单选或多选框，使用遍历元素的方法
+    $sex.each((index, el) => {
+        console.log(index)
+        console.log(el)
+        // 当单选按钮的值为 male 时
+        if (el.value === 'male') {
+            // 勾选该元素
+            el.checked = true
+            // jquery each函数，可以使用 return 跳出循环
+            return
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 表单元素被禁用时的样式 */
+        input:disabled {
+            border: 3px solid red;
+        }
+
+        /* disabled仅限于表单元素使用 */
+        .box:disabled {
+            border: 3px solid black;
+        }
+
+        .box {
+            width: 200px;
+            height: 100px;
+        }
+
+        /* checked代表被勾选的元素 */
+        input[name=sex]:checked {
+            width: 100px;
+            height: 100px;
+        }
+
+        /* 选中元素中的第一个字符 */
+        .hw::first-letter {
+            color: red;
+        }
+
+        .p1 {
+            width: 100px;
+            height: 130px;
+            word-wrap: break-word;
+        }
+
+        /* 元素中的第一行内容 */
+        .p1:first-line {
+            color: green;
+        }
+
+        /* 选中的内容 */
+        .p2::selection {
+            background-color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div><label>name: <input name="name" disabled /></label></div>
+        <div class="box" tabindex="1" disabled></div>
+        <div>sex:
+            <label>男：<input name="sex" type="radio" checked /></label>
+            <label>女：<input name="sex" type="radio" /></label>
+        </div>
+    </form>
+    <div class="hw">Hello World</div>
+    <div class="p1">lkasghdaljfdgklashdgklawejrtljaoierthgilasejgaeryhtgaori</div>
+    <div class="p2">ljkayeroi;tjgalerfghjaoiefyhgqaorjtkaELRGKJ</div>
+</body>
+
+</html>

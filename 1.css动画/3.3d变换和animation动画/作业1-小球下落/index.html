@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball {
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            background-color: cornflowerblue;
+        }
+
+        .step1 {
+            animation: step1 1s cubic-bezier(0.85, 0.06, 1, 1) forwards;
+        }
+
+        @keyframes step1 {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(400px);
+            }
+        }
+
+        .step2 {
+            animation: step2 1s cubic-bezier(0.85, 0.06, 1, 1) reverse forwards;
+        }
+
+        @keyframes step2 {
+            from {
+                transform: translateY(200px);
+            }
+
+            to {
+                transform: translateY(400px);
+            }
+        }
+
+        .step3 {
+            animation: step3 1s cubic-bezier(0.85, 0.06, 1, 1) forwards;
+        }
+
+        @keyframes step3 {
+            from {
+                transform: translateY(200px);
+            }
+
+            to {
+                transform: translateY(400px);
+            }
+        }
+
+        .ball-bg {
+            animation: h 3s linear forwards;
+        }
+
+        @keyframes h {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(400px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ball-bg用于播放小球横向移动的动画 -->
+    <div class="ball-bg">
+        <!-- ball用于播放小球纵向移动的动画 -->
+        <div class="ball"></div>
+    </div>
+</body>
+
+<script>
+    let ball = document.querySelector('.ball')
+
+    // ball.addEventListener('animationend', () => {
+    //     ball.classList.remove('step1')
+    //     ball.classList.add('step2')
+
+    //     ball.addEventListener('animationend', () => {
+    //         ball.classList.remove('step2')
+    //         ball.classList.add('step3')
+    //     })
+    // })
+
+    let arr = ['step1', 'step2', 'step3']
+
+    // 用于存储事件的回调函数
+    let callback
+
+    function play(index) {
+        // 获取要播放的动画类
+        let clazz = arr[index]
+        if (!clazz) return
+
+        // 重置播放状态
+        // 删除上一个动画
+        if (index - 1 >= 0) ball.classList.remove(arr[index - 1])
+        // 删除上一个动画结束事件
+        if (callback) ball.removeEventListener('animationend', callback)
+
+        ball.classList.add(clazz)
+        // 赋值callback，动画结束事件
+        callback = () => {
+            // 在动画播放结束后，播放下一段动画
+            play(++index)
+        }
+        ball.addEventListener('animationend', callback)
+    }
+
+    play(0)
+</script>
+
+</html>

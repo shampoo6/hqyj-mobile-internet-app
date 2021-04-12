@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+
+            animation: box-move 1s linear alternate infinite;
+
+        }
+
+        @keyframes box-move {
+
+            /* 初始状态 */
+            from {
+                margin-left: 0;
+                font-size: 32px;
+            }
+
+            /* 结束状态 */
+            to {
+                margin-left: 600px;
+                font-size: 14px;
+                background-color: green;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">hello world</div>
+    <button>暂停</button>
+</body>
+
+<script>
+    let box = document.querySelector('.box')
+    let btn = document.querySelector('button')
+    console.dir(box)
+    btn.addEventListener('click', () => {
+        console.log('click')
+        // 可以通过给 animationPlayState 样式赋值，来达到暂停和继续播放动画的效果
+        console.log(box.style.animationPlayState)
+
+        if (box.style.animationPlayState === '') {
+            // 当值为 pasued 时，将暂停播放
+            box.style.animationPlayState = 'paused'
+        } else if (box.style.animationPlayState === 'paused') {
+            // 当值为 running 时，将继续播放
+            box.style.animationPlayState = 'running'
+        } else {
+            box.style.animationPlayState = 'paused'
+        }
+    })
+</script>
+
+</html>

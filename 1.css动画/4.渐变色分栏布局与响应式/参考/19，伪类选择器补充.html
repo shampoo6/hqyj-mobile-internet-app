@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*伪类选择器
+			 	常用的：
+			 	：disabled
+			 	: checked
+			 	：first-letter
+			 	：first-line
+			 	：：selection
+			*/
+			:disabled{
+				position: relative;
+				top: 50px;
+			}
+			:checked{
+				position: relative;
+				top: 100px;
+			}
+			.box:first-letter{
+				font-size: 30px;
+				background: red;
+			}
+			.box:first-line{
+				font-size: 30px;
+				background: green;
+			}
+			/*修改选中文字的样式*/
+			.box::selection{  
+				background: goldenrod;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="checkbox" name="" id="" value="" checked="checked"/>
+		<input type="checkbox" name="" id="" value="" />
+		<input type="checkbox" name="" id="" value="" disabled="disabled"/>
+		<input type="checkbox" name="" id="" value="" />
+		<br />
+		<br />
+		
+		<br />
+		<br />
+		<div class="box">
+			我是文字
+			我是文字
+			我是文字
+			我是文字
+			我是文字
+		</div>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    let $li = $('<ul>' +
+        '<li>这是创建的li标签1</li>' +
+        '<li>这是创建的li标签2</li>' +
+        '<li>这是创建的li标签3</li>' +
+        '</ul>')
+
+    // 追加到子节点
+    // $(document.body).append($li)
+    // 插入到子节点最前端
+    // $(document.body).prepend($li)
+    // 将指定元素插入到指定位置
+    // $li.insertBefore($('.box:nth-child(2)'))
+    // $li.insertAfter($('.box:nth-child(2)'))
+    // 在指定节点的前或后插入另一个节点
+    // $('.box:nth-child(2)').after($li)
+    // $('.box:nth-child(2)').before($li)
+
+</script>
+
+</html>

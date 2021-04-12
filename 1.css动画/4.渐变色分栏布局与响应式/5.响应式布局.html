@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 参考地址：https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media */
+        /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/Media_Queries/Using_media_queries */
+
+        /* 使用媒体查询，来实现响应式布局 */
+        /* 媒体查询的作用：当媒体查询条件成立时，将应用花括号中代码块的样式 */
+
+        /* 语法：@media media-type and (condition1) and (condition2) */
+
+        /* 媒体类型 media-type：
+            备选项
+            all: 所有设备
+            print：打印机的预览模式
+            screen：显示屏
+            speech：语音合成器
+         */
+        /* min-width: 屏幕最小宽度 */
+        @media screen and (min-width: 800px) {
+            .sidebar {
+                display: block;
+            }
+
+            .sidebar-mini {
+                display: none;
+            }
+        }
+
+        /* max-width: 屏幕最大宽度 */
+        @media screen and (max-width: 800px) {
+            .sidebar {
+                display: none;
+            }
+
+            .sidebar-mini {
+                display: block;
+            }
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar,
+        .sidebar-mini {
+            width: 200px;
+            border-right: 5px solid black;
+        }
+
+        .sidebar>div,
+        .sidebar-mini>div {
+            line-height: 80px;
+            text-align: center;
+            border-bottom: 3px solid gray;
+            font-size: 40px;
+        }
+
+        .sidebar-mini {
+            width: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div>首页</div>
+        <div>咨询</div>
+        <div>视频</div>
+    </div>
+
+    <div class="sidebar-mini">
+        <div>首</div>
+        <div>咨</div>
+        <div>视</div>
+    </div>
+</body>
+
+<script>
+    let sidebar = document.querySelector('.sidebar')
+    let sidebarMini = document.querySelector('.sidebar-mini')
+
+    // 窗口加载完成后设置侧边栏高度
+    window.addEventListener('load', () => {
+        sidebar.style.height = window.innerHeight + 'px'
+        sidebarMini.style.height = window.innerHeight + 'px'
+    })
+
+    // 窗口大小发生变化事件
+    window.addEventListener('resize', () => { 
+        // 当窗口大小发生变化时，应当重新给侧边栏修改高度
+        sidebar.style.height = window.innerHeight + 'px'
+        sidebarMini.style.height = window.innerHeight + 'px'
+    })
+</script>
+
+</html>

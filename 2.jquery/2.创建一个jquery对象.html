@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    //  方法一：使用选择器调用$()函数直接获得jquery对象
+    // let $box = $('.box')
+
+    // 方法二：可以通过dom对象获取jquery对象
+    let box = document.querySelector('.box')
+    let $box = $(box)
+</script>
+
+</html>

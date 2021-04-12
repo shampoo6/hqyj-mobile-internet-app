@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+</body>
+
+<script>
+    // 获取画布
+    let c = document.querySelector('canvas')
+    let ctx = c.getContext('2d')
+
+    // 编辑字体
+
+    ctx.font = '32px 微软雅黑'
+
+
+
+    // 填充文本
+    // 语法：ctx.fillText(text, x, y, max-width)
+    // text: 要渲染的文本
+    // x,y: 文本渲染的坐标位置
+    // max-width: 文本最大宽度，当大于该宽度，文本字体将自动缩小以自适应宽度
+    ctx.fillText('Hello World', 250, 250)
+
+    // 镂空文本
+    ctx.strokeText('Hello China', 100, 50)
+
+</script>
+
+</html>

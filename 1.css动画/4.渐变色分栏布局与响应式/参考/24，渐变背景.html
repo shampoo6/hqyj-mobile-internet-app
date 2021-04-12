@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/gradient */
+			div{
+				width: 100px;
+				height: 100px;
+				border: 1px solid #000;
+			}
+			/*线性渐变*/
+			.box1{
+				/*background: linear-gradient(red,green);*/
+				/*background: linear-gradient(to top, #ff0000,#00ff00);*/
+				background: linear-gradient(to left top, red,blue);
+				/*background: linear-gradient(45deg,rgba(255,0,0,0.8),rgba(0,0,255,0.8));*/
+			}
+			.box2{
+				background: repeating-linear-gradient(rgba(0,200,0,0.8) 0%,rgba(0,200,0,0.8) 10%, rgba(0,0,255,0.8) 10%,rgba(0,0,255,0.8) 20%,rgba(255,0,0,0.8) 20%,rgba(255,0,0,0.8)30%);
+			}
+			/*径向渐变*/
+			.box3{
+				background: radial-gradient(rgba(0,200,150,0.8),rgba(120,0,20,0.8));
+			}
+			.box4{
+				background: repeating-radial-gradient(rgba(0,200,150,0.8) 0%,rgba(0,200,150,0.8) 10%, rgba(120,0,20,0.8) 10%,rgba(120,0,20,0.8) 20%);
+			}
+			/*线性渐变一定要给方向，不给方向默认为从上至下
+				径向渐变是不需要指定方向的 
+			*/
+		</style>
+	</head>
+	<body>
+		<div class="box1"></div>
+		<div class="box2"></div>
+		<div class="box3"></div>
+		<div class="box4"></div>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 匹配属性值包含指定内容的元素 */
+        input[name*=e] {
+            border: 3px solid red;
+        }
+
+        /* 匹配属性值以指定内容开头的元素 */
+        input[name^=s] {
+            font-size: 24px;
+        }
+
+        /* 匹配属性值以指定内容结束的元素 */
+        input[name$=e] {
+            background-color: greenyellow;
+        }
+        /* 匹配属性值包含 dep- 开头的元素 */
+        input[name|=dep] {
+            border: 3px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div><label>name: <input name="name" /></label></div>
+        <div><label>sex: <input name="sex" /></label></div>
+        <div><label>age: <input name="age" /></label></div>
+        <div><label>school: <input name="school" /></label></div>
+        <div><label>department: <input name="dep-inp" /></label></div>
+    </form>
+</body>
+
+</html>

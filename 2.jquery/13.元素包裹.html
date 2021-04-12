@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="t">hello world</div>
+    <div class="t">hello world</div>
+    <div class="t">hello world</div>
+    <div class="t">hello world</div>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+    // wrap wrapAll 函数作用是将指定元素用一段html内容包裹起来
+
+    let $t = $('.t')
+
+    // wrap 作用是给每个元素用指定的html内容包裹起来
+    // $t.wrap('<div class="box"></div>')
+
+    // wrapAll 作用是将jquery对象查询出来的所有元素用指定的html内容包裹起来
+    $t.wrapAll('<div class="box"></div>')
+
+</script>
+</html>
