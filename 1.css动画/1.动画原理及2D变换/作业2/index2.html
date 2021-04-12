@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .leaf1,
+        .leaf2,
+        .leaf3,
+        .leaf4 {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 100px 50px;
+            border-color: transparent transparent red red;
+            position: absolute;
+            left: 200px;
+            top: 50px;
+
+            transform-origin: left bottom;
+        }
+
+        .leaf2 {
+            transform: rotate(90deg);
+            border-color: transparent transparent blue blue;
+        }
+        .leaf3 {
+            transform: rotate(180deg);
+        }
+        .leaf4 {
+            transform: rotate(270deg);
+            border-color: transparent transparent blue blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="leaf1"></div>
+    <div class="leaf2"></div>
+    <div class="leaf3"></div>
+    <div class="leaf4"></div>
+</body>
+
+</html>

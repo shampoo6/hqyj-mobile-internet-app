@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+
+            /* 参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-origin */
+
+            /* 设置transform的原点 */
+            /* 原点的位置会影响旋转的圆心，缩放的位置 */
+            
+            /* 值的带选项：center, top, bottom, left, right, 还可以写具体的长度值 */
+            /* transform-origin: center; */
+
+            /* 原点若x值和y值都为0，代表的是元素左上角的位置 */
+            /* 第一参数值代表横向移动的距离，正数代表向右移动，负数代表向左移动 */
+            /* 第二参数值代表纵向移动的距离，正数代表向下移动，负数代表向上移动 */
+            transform-origin: 0 0;
+
+            /* transform: rotate(30deg); */
+            transform: scaleX(0.5);
+        }
+
+        .point {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            border-radius: 10px;
+
+            position: absolute;
+            top: 190px;
+            left: 190px;
+
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="point"></div>
+    <div class="box"></div>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .windmill {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .leaf1,
+        .leaf2,
+        .leaf3,
+        .leaf4 {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 100px 50px;
+            border-color: transparent transparent red red;
+            position: absolute;
+            top: 0;
+            left: 200px;
+
+            transform-origin: left bottom;
+        }
+
+        .leaf2 {
+            transform: rotate(90deg);
+            border-color: transparent transparent blue blue;
+        }
+
+        .leaf3 {
+            transform: rotate(180deg);
+        }
+
+        .leaf4 {
+            transform: rotate(270deg);
+            border-color: transparent transparent blue blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="windmill">
+        <div class="leaf1"></div>
+        <div class="leaf2"></div>
+        <div class="leaf3"></div>
+        <div class="leaf4"></div>
+    </div>
+</body>
+
+<script>
+    // 声明每个叶子的旋转角度
+    let deg1 = 0
+    let deg2 = 90
+    let deg3 = 180
+    let deg4 = 270
+    // 获取元素
+    let leaf1 = document.querySelector('.leaf1')
+    let leaf2 = document.querySelector('.leaf2')
+    let leaf3 = document.querySelector('.leaf3')
+    let leaf4 = document.querySelector('.leaf4')
+    let windmill = document.querySelector('.windmill')
+
+    // 声明一个描述旋转方向的变量
+    let direction = true
+
+    function rotateLeafs() {
+        handler = setTimeout(() => {
+            // 每帧增加一点旋转角度
+            deg1 = direction ? deg1 + 1 : deg1 - 1
+            deg2 = direction ? deg2 + 1 : deg2 - 1
+            deg3 = direction ? deg3 + 1 : deg3 - 1
+            deg4 = direction ? deg4 + 1 : deg4 - 1
+
+            if (direction) {
+                if (deg1 >= 360) deg1 - 360
+                if (deg2 >= 360) deg2 - 360
+                if (deg3 >= 360) deg3 - 360
+                if (deg4 >= 360) deg4 - 360
+            }
+            else {
+                if (deg1 <= 0) deg1 + 360
+                if (deg2 <= 0) deg2 + 360
+                if (deg3 <= 0) deg3 + 360
+                if (deg4 <= 0) deg4 + 360
+            }
+
+            // 赋值角度属性
+            leaf1.style.transform = 'rotate(' + deg1 + 'deg)'
+            leaf2.style.transform = 'rotate(' + deg2 + 'deg)'
+            leaf3.style.transform = 'rotate(' + deg3 + 'deg)'
+            leaf4.style.transform = 'rotate(' + deg4 + 'deg)'
+
+            rotateLeafs()
+        }, 10)
+    }
+
+    rotateLeafs()
+
+    // 给风车绑定鼠标悬停和移出事件
+    windmill.addEventListener('mouseover', () => {
+        direction = false
+    })
+    windmill.addEventListener('mouseout', () => {
+        direction = true
+    })
+</script>
+
+</html>

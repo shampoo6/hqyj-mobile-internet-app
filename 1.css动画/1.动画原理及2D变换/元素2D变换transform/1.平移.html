@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            left: 200px;
+
+            /* 设置平移，旋转，缩放等状态，这些状态我们称为 transform（变化） */
+
+            /* transform: 设置元素变化 */
+            /* translate: 平移元素 */
+            /* 第一个参数：横向移动的坐标 */
+            /* 第二个参数：纵向移动的坐标 */
+            /* 参数值为0时，代表的是元素初始的位置 */
+            transform: translate(100px, 120px);
+            /* 以下三个translate，可以单独描述某个轴上的坐标值 */
+            /* transform: translateX(100px) */
+            /* transform: translateY(100px) */
+            /* transform: translateZ(100px); */
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

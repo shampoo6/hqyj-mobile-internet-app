@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav-item {
+            width: 5em;
+            height: 3em;
+            color: white;
+            background-color: goldenrod;
+            margin-right: 10px;
+            transform: skewX(-20deg);
+
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-bar {
+            display: flex;
+        }
+
+        .nav-item>span {
+            transform: skewX(20deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="nav-item"><span>首页</span></div>
+        <div class="nav-item"><span>新闻</span></div>
+    </div>
+</body>
+
+</html>

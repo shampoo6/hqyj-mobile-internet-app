@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .leaf1, .leaf2, .leaf3, .leaf4 {
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 100px;
+            left: 300px;
+
+            border-width: 100px 50px;
+            border-color: black black transparent transparent;
+            border-style: solid;
+            
+            transform-origin: 100px 200px;
+        }
+
+        .leaf2 {
+            transform: rotate(90deg);
+        }
+        .leaf3 {
+            transform: rotate(180deg);
+        }
+        .leaf4 {
+            transform: rotate(270deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="leaf1"></div>
+    <div class="leaf2"></div>
+    <div class="leaf3"></div>
+    <div class="leaf4"></div>
+</body>
+
+</html>

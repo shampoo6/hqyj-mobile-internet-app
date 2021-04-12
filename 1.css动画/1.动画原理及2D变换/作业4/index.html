@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clock {
+            width: 400px;
+            height: 400px;
+            background-color: gray;
+            border-radius: 200px;
+        }
+
+        .bg {
+            width: 360px;
+            height: 360px;
+            background-color: black;
+            border-radius: 180px;
+            position: relative;
+            top: 20px;
+            left: 20px;
+        }
+
+        .time {
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            background-color: rgb(255, 255, 255);
+            position: absolute;
+            top: 10px;
+            left: 174px;
+            transform-origin: center 170px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 时钟div -->
+    <div class="clock">
+        <!-- 表盘 -->
+        <div class="bg">
+            <!-- 刻度模板 -->
+            <div class="time"></div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    // 获取表盘元素
+    let bg = document.querySelector('.bg')
+
+    // 声明html用于存储所有的刻度
+    let html = ''
+
+    // 声明每秒转动的角度常量
+    const deg = 6
+
+    for (let i = 0; i < 60; i++) {
+        // 声明height用于存储每5分钟的刻度的高度的样式
+        let height = ''
+        if (i % 5 === 0) height = '; height: 24px;'
+        // 让刻度旋转
+        // 思路：旋转角度 = i * 每秒旋转的角度
+        let _deg = i * deg
+        html += '<div class="time" style="transform: rotate(' + _deg + 'deg)' + height + '"></div>'
+    }
+
+    bg.innerHTML = html
+
+</script>
+
+</html>

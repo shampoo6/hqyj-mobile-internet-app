@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            position: absolute;
+            left: 200px;
+            top: 200px;
+
+            /* 设置平移，旋转，缩放等状态，这些状态我们称为 transform（变化） */
+
+            /* transform: 设置元素变化 */
+            /* rotate3d: 元素的3D旋转 */
+            /* 前3个参数，一起代表旋转轴的向量值，最后一个参数代表旋转角度 */
+            /* transform: rotate3d(0, 0, 0, 0deg); */
+
+            /* 延x轴旋转 */
+            transform: rotate3d(1, 0, 0, 45deg);
+            /* 延y轴旋转 */
+            transform: rotate3d(0, 1, 0, 45deg);
+            /* 延z轴旋转 */
+            transform: rotate3d(0, 0, 1, 45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <img width="128" src="./img/player.jpg" />
+</body>
+
+</html>
