@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn1">查询列表</button>
+    <div class="page-search">
+        <input name="kw" placeholder="请输入姓名中包含的关键字" />
+        <input name="page" placeholder="请输入页码" />
+        <button class="btn2">分页查询</button>
+    </div>
+</body>
+<script src="../js/av-min.js"></script>
+<script>
+
+    // 文档 ： https://leancloud.cn/docs/leanstorage_guide-js.html#hash860317
+
+    // 初始化sdk
+    AV.init({
+        appId: "94Ddp1dFbb1BTQsKcunCQYFk-gzGzoHsz",
+        appKey: "te8OSHbMAvaunzdFGzzTvvvC",
+        // server服务器地址，来自于 设置->应用keys 中的"REST API 服务器地址"
+        serverURL: "https://94ddp1df.lc-cn-n1-shared.com"
+    })
+
+    // 按照id查询
+    // 创建查询对象，参数为表名称
+    let query = new AV.Query('Student')
+    // 添加查询条件
+    // equalTo是相等判断
+    // 第一个参数：要查询的表中的字段名
+    // 第二个参数：要查询的对应字段值
+    // query.equalTo('objectId', '605863124bcfb013cb35e9e9')
+    // // 调用 query.find 函数进行查询
+    // let result = query.find()
+    // console.log(result) // result 是promise对象，所以可以调用then和catch函数
+    // result.then(res => {
+    //     // 在then函数中拿到查询结果
+    //     // res是个数组，结果存放在数组的项的 attrbuites 中
+    //     console.log(res)
+    // }).catch(reason => {
+    //     console.error(reason)
+    // })
+
+    // 模糊查询
+    query = new AV.Query('Student')
+    // 调用 contains 函数查询指定字段中包含某段文本的数据
+    // 第一个参数：字段名称
+    // 第二个参数：所包含的内容
+    // query.contains('name', '三')
+    // query.find().then(res => {
+    //     console.log(res)
+    // }).catch(reason => {
+    //     console.error(reason)
+    // })
+
+    // 方法二：通过正则表达式进行匹配
+    // let regex = /^[\s\S]*三[\s\S]*$/
+    // // 通过 query。matches 函数，让指定字段去匹配正则表达式，查询结果会返回匹配成功的数据
+    // query.matches('name', regex)
+    // query.find().then(res => {
+    //     console.log(res)
+    // }).catch(reason => {
+    //     console.error(reason)
+    // })
+
+    // 条件查询
+    // 大于 greaterThan
+    // 大于等于
+    // query.greaterThanOrEqualTo('age', 16)
+    // // 小于 lessThan
+    // // 小于等于
+    // query.lessThanOrEqualTo('age', 27)
+
+    // 不等于
+    // query.notEqualTo('name', '张三')
+    // query.find().then(res => {
+    //     console.log(res)
+    // }).catch(reason => {
+    //     console.error(reason)
+    // })
+
+    // 列表查询
+    // 列表查询若要分批次查询，需要在每行数据记录时间戳，createTime 和 updateTime，分别代表创建数据的时间，和修改数据的时间
+
+    // let btn1 = document.querySelector('.btn1')
+    // btn1.addEventListener('click', () => {
+    //     findNext()
+    // })
+
+    // // 列表查询，一定要记录最后一条数据的时间戳
+    // let lastTime
+
+    // // 列表查询函数
+    // function findNext() {
+    //     let _query = new AV.Query('Student')
+    //     if (lastTime)
+    //         _query.lessThan('updateTime', lastTime)
+    //     // 可以通过limit函数限制数据库一次查询的数量
+    //     _query.limit(3)
+
+
+    //     // 排序
+    //     // 按照指定字段进行降序排列
+    //     // 参数是进行降序排列的字段名称
+    //     _query.descending('updateTime')
+
+    //     _query.find().then(res => {
+    //         console.log(res)
+    //         // 跟新lastTime
+    //         lastTime = res[res.length - 1].attributes.updateTime
+    //     }).catch(reason => {
+    //         console.error(reason)
+    //     })
+    // }
+
+    // 分页查询
+    // 分页查询有以下几个必要参数
+    // 查询的当前页
+    // let page = 1
+    // // 每页查询的记录数
+    // let size = 3
+    // // 限制查询出来的数据量
+    // query.limit(size)
+    // // 跳过前面页码中的数据
+    // // 参数是需要跳过的记录数
+    // query.skip((page - 1) * size)
+    // query.find().then(res => {
+    //     console.log(res)
+    // }).catch(reason => {
+    //     console.error(reason)
+    // })
+
+
+    // 分页查询函数
+    // kw: 代表姓名的模糊匹配
+    function page(page, size, kw) {
+        console.log(kw)
+
+        query = new AV.Query('Student')
+        // 增加查询条件
+        if (kw && kw.trim() !== '') {
+            // let regex = new RegExp('^[\\s\\S]*' + kw + '[\\s\\S]*$')
+            // query.matches('name', regex)
+            query.contains('name', kw)
+        }
+
+        // 限制查询出来的数据量
+        query.limit(size)
+        // 跳过前面页码中的数据
+        // 参数是需要跳过的记录数
+        query.skip((page - 1) * size)
+        query.descending('updateTime')
+        query.find().then(res => {
+            console.log(res)
+        }).catch(reason => {
+            console.error(reason)
+        })
+
+        // 查询满足条件的总记录数
+        query.count().then(count => {
+            console.log('student表中，满足条件的记录有：' + count + '条')
+            // 计算总页数
+            let totalPage = Math.ceil(count / size)
+            console.log('总共' + totalPage + '页')
+        })
+    }
+
+    let btn2 = document.querySelector('.btn2')
+    let inp = document.querySelector('.page-search>input[name=page]')
+    let kw = document.querySelector('.page-search>input[name=kw]')
+    btn2.addEventListener('click', () => {
+        page(Number(inp.value), 3, kw.value)
+    })
+</script>
+
+
+</html>

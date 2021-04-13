@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script src="../js/av-min.js"></script>
+<script>
+    // 有时需要查询同时满足两个条件的数据或者有两个条件满足其一就可以的数据
+    // 这是可以使用组合查询
+
+    // 方法：
+    // 有多少个条件就创建多少个查询对象
+
+    // 例如以下两个查询条件，分别查询书名和作者
+    let query1 = new AV.Query('Book')
+    query1.contains('name', '钢铁')
+
+    let query2 = new AV.Query('Book')
+    query2.contains('author', '张')
+
+    // 将多个查询条件使用组合查询并列起来
+    // or 或   and 且
+    let query = AV.Query.or(query1, query2)
+    // 调用万or后的query依然是个查询对象
+    // 可以使用query.find进行数据库查询
+    query.find()
+</script>
+
+</html>

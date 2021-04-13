@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <div><label>姓名：<input name="name" value="王某" /></label></div>
+        <div>性别：
+            <label>男<input type="radio" name="sex" checked value="male" /></label>
+            <label>女<input type="radio" name="sex" value="female" /></label>
+        </div>
+        <div><label>年龄：<input name="age" value="8" /></label></div>
+        <div>
+            <button>提交</button>
+        </div>
+    </form>
+</body>
+
+<script src="../js/av-min.js"></script>
+<script>
+    // 初始化 sdk
+    AV.init({
+        appId: "94Ddp1dFbb1BTQsKcunCQYFk-gzGzoHsz",
+        appKey: "te8OSHbMAvaunzdFGzzTvvvC",
+        serverURL: "https://94ddp1df.lc-cn-n1-shared.com"
+    })
+
+    // 创建类
+    let Student = AV.Object.extend('Student')
+
+    let form = document.querySelector('form')
+    let btn = document.querySelector('form button')
+    btn.addEventListener('click', ev => {
+        ev.stopPropagation()
+        ev.preventDefault()
+
+        let fd = new FormData(form)
+
+        // 构造表数据
+        let stu = new Student()
+        stu.set('name', fd.get('name'))
+        stu.set('sex', fd.get('sex'))
+        stu.set('age', Number(fd.get('age')))
+
+        let now = Date.now()
+        stu.set('createTime', now)
+        stu.set('updateTime', now)
+
+        // 保存入库
+        stu.save().then(res => {
+            console.log(res)
+            alert('保存成功')
+        }).catch(reason => {
+            console.error(reason)
+            alert('服务器繁忙，请稍后再试')
+        })
+    })
+</script>
+
+</html>

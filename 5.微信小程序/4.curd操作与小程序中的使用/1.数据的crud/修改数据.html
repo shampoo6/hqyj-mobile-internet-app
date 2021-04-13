@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script src="../js/av-min.js"></script>
+<script>
+    // 初始化sdk
+    AV.init({
+        appId: "94Ddp1dFbb1BTQsKcunCQYFk-gzGzoHsz",
+        appKey: "te8OSHbMAvaunzdFGzzTvvvC",
+        serverURL: "https://94ddp1df.lc-cn-n1-shared.com"
+    })
+
+    // 通过保存操作来修改数据
+
+    // 创建一行数据
+    // 第一个参数：数据来源的表名
+    // 第二个参数：表中的ObjectId值，用于指示要修改哪条数据
+    let stu = AV.Object.createWithoutData('Student', '605863124bcfb013cb35e9e9')
+    // 修改想要更新的字段
+    stu.set('name', '李四')
+    stu.set('sex', 'female')
+    stu.set('age', 24)
+
+    // 修改update时间戳
+    stu.set('updateTime', Date.now())
+
+    // 保存
+    stu.save().then(res => {
+        console.log(res)
+    }).catch(reason => {
+        console.error(reason)
+    })
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script src="../js/av-min.js"></script>
+<script>
+
+    // 文档： https://leancloud.cn/docs/leanstorage_guide-js.html#hash664090316
+
+    // 初始化sdk
+    AV.init({
+        appId: "94Ddp1dFbb1BTQsKcunCQYFk-gzGzoHsz",
+        appKey: "te8OSHbMAvaunzdFGzzTvvvC",
+        serverURL: "https://94ddp1df.lc-cn-n1-shared.com"
+    })
+
+    // 使用 createWithoutData 创建一行数据
+    // 第一个参数：表名
+    // 第二个参数：指定表下的id值
+    let stu = AV.Object.createWithoutData('Student', '60596249eec6e5629f95531f')
+    // 调用destroy函数，销毁该行数据
+    let result = stu.destroy()
+    result.then(res => {
+        console.log(res)
+    }).catch(reason => {
+        console.error(reason)
+    })
+</script>
+
+</html>
