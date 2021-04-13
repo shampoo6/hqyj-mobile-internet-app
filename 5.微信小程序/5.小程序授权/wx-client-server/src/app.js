@@ -1,11 +1,11 @@
 import express from 'express'
-import bodyParser from 'body-parser'
+import bodyParser from ''
 import cryptoJs from 'crypto-js'
 import WXBizDataCrypt from './WXBizDataCrypt.js'
 import axios from 'axios'
 
-const appId = 'wx9b2daa4d3a447583'
-const secret = 'd99588781ab3998df7f97d267eabbf9b'
+const appId = 'wx9b2daa4d3a447583' // 请填入自己的appid
+const secret = 'd99588781ab3998df7f97d267eabbf9b' // 请自己声请一个secret
 
 const app = express()
 const port = 9527
@@ -16,7 +16,7 @@ let wxData = {
 }
 
 // 解析 application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 // 解析 application/json
 app.use(bodyParser.json())
 
@@ -41,7 +41,7 @@ app.get('/login', (req, res) => {
         console.error(reason)
     })
 
-    res.json({msg: 'ok'})
+    res.json({ msg: 'ok' })
 })
 
 // 数据校验
@@ -50,7 +50,7 @@ app.get('/validateData', (req, res) => {
     let signture = cryptoJs.SHA1(req.query.rawData + wxData.session_key)
     console.log(signture.toString())
     console.log(signture.toString() === req.query.signature)
-    res.json({result: signture.toString() === req.query.signature})
+    res.json({ result: signture.toString() === req.query.signature })
 })
 
 // 解密用户的敏感数据
