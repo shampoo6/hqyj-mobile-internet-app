@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            overflow: hidden;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+</body>
+<script>
+    // 降雪策略
+    // 设置一个降雪密度，每多少像素宽，容纳多少雪花
+    // 随机位置降雪
+    // 雪花大小随机
+    // 每个雪花速度随机
+    // 雪花超出屏幕会自动销毁
+
+    let config = {
+        fps: 60, // 帧率
+        snow: {
+            radius: {
+                min: 5,
+                max: 15
+            },
+            speed: {
+                min: 5,
+                max: 15
+            }
+        },
+        sm: {
+            countPerHundred: 2, // 屏幕每有一百像素宽，就有几个雪花，决定雪的密度
+            spawnFrameCount: { // 生成雪的速率
+                min: 3, // 最快每多少帧生成一个雪
+                max: 15 // 最慢每多少帧生成一个雪
+            }
+        }
+    }
+
+    class Snow {
+        ctx
+        position = {x: 0, y: 0}
+        radius
+        speed
+        isDead = false // 判断是否应被删除
+
+        constructor(_ctx) {
+            this.ctx = _ctx
+            this.init()
+        }
+
+        init() {
+            this.radius = getRadius()
+
+            function getSpeed() {
+                let space = config.snow.speed.max - config.snow.speed.min
+                return config.snow.speed.min + (Math.floor(Math.random() * space * 1000) % space)
+            }
+
+            this.speed = getSpeed()
+
+            // 随机雪花大小
+            function getRadius() {
+                let space = config.snow.radius.max - config.snow.radius.min
+                return config.snow.radius.min + (Math.floor(Math.random() * space * 1000) % space)
+            }
+        }
+
+        render() {
+            this.ctx.fillStyle = '#fff'
+            this.ctx.beginPath()
+            this.ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
+            this.ctx.closePath()
+            this.ctx.fill()
+        }
+
+        update() {
+            this.position.y += this.speed
+            // 超出屏幕应该删除
+            if (this.position.y > window.innerHeight) {
+                this.isDead = true
+            }
+        }
+    }
+
+    class SnowManager {
+        canvas
+        ctx
+        snows = []
+        maxSnow
+        lastTimestamp = 0
+        currentTime = 0 // 当前动画时间
+        targetTime = 1000 / config.fps // 目标每帧时间
+        nextSpawnFrameCount = 0 // 下次生成雪的间隔帧数，采用倒计时方式计算
+
+        constructor() {
+            this.canvas = document.querySelector('canvas')
+            this.ctx = this.canvas.getContext('2d')
+            this.update = this.update.bind(this)
+            this.resize()
+
+            window.addEventListener('resize', () => {
+                this.resize()
+            })
+        }
+
+        resize() {
+            this.canvas.width = window.innerWidth
+            this.canvas.height = window.innerHeight
+
+            // 重新计算最大雪量
+            this.maxSnow = Math.floor(window.innerWidth / config.sm.countPerHundred)
+        }
+
+        // 生成雪
+        spawnSnow() {
+            // 随机位置
+            let x = Math.floor(Math.random() * window.innerWidth * 100000) % window.innerWidth
+            let snow = new Snow(this.ctx);
+            snow.position.x = x
+            // snow.render()
+
+            this.snows.push(snow)
+        }
+
+        start() {
+            requestAnimationFrame(this.update)
+        }
+
+        update(timestamp) {
+            let delta = timestamp - this.lastTimestamp
+            this.lastTimestamp = timestamp
+
+            // 计算时间
+            this.currentTime += delta
+            // 判断是否到达一帧的时长
+            if (this.currentTime >= this.targetTime) {
+                this.currentTime -= this.targetTime
+                this.frameLogic()
+            }
+
+            requestAnimationFrame(this.update)
+        }
+
+        // 每帧逻辑
+        frameLogic() {
+            // 先绘制，后更新状态
+            this.render()
+
+            // 更新所有对象状态
+            this.snows.forEach(snow => {
+                snow.update()
+            })
+
+            // 过滤死亡的雪花
+            this.snows = this.snows.filter(snow => {
+                return !snow.isDead
+            })
+
+            this.nextSpawnFrameCount--
+
+            // 到达生成雪花的时间
+            if (this.nextSpawnFrameCount <= 0) {
+                // 生成雪花
+                if (this.snows.length < this.maxSnow) {
+                    this.spawnSnow()
+                }
+
+                // 随机下次生成雪花的帧数
+                let space = config.sm.spawnFrameCount.max - config.sm.spawnFrameCount.min
+                this.nextSpawnFrameCount = config.sm.spawnFrameCount.min + Math.floor(Math.random() * space * 10000) % space
+            }
+        }
+
+        render() {
+            this.ctx.fillStyle = '#000'
+            this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+
+            this.snows.forEach(snow => {
+                snow.render()
+            })
+        }
+    }
+
+    let sm = new SnowManager();
+    sm.start()
+
+</script>
+</html>

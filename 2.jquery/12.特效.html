@@ -16,45 +16,98 @@
 </head>
 
 <body>
-    <div class="box"></div>
-    <div>
-        <button>隐藏</button>
-        <button>显示</button>
-        <button>开关</button>
-        <button>渐出</button>
-        <button>渐入</button>
-        <button>开关2</button>
-    </div>
+<h1>基本动画</h1>
+<div class="section1">
+    <button>显示</button>
+    <button>隐藏</button>
+    <button>开关</button>
+</div>
+<div class="box box1"></div>
+<h2>自定义动画</h2>
+<div class="section2">
+    <button>animate</button>
+</div>
+<div class="box box2"></div>
+
+<h1>渐变</h1>
+<div class="section3">
+    <button>渐入</button>
+    <button>渐出</button>
+    <button>设置透明度</button>
+    <button>开关渐入渐出</button>
+</div>
+<div class="box box3"></div>
+
+<h1>滑动</h1>
+<div class="section4">
+    <button>滑下</button>
+    <button>滑上</button>
+    <button>滑动开关</button>
+</div>
+<div class="box box4"></div>
 </body>
 <script src="./js/jquery.min.js"></script>
 <script>
     // 参考：https://www.jquery123.com/category/effects/
 
-    let $box = $('.box')
-    let $btn1 = $('button').eq(0)
-    let $btn2 = $('button').eq(1)
-    let $btn3 = $('button').eq(2)
-    let $btn4 = $('button').eq(3)
-    let $btn5 = $('button').eq(4)
-    let $btn6 = $('button').eq(5)
+    let $box1 = $('.box1');
+    let $box2 = $('.box2');
+    let $box3 = $('.box3');
+    let $box4 = $('.box4');
 
-    $btn1.on('click', () => {
-        $box.hide() // 调用hide函数，隐藏元素
+    // jquery 特效
+
+    // 基本动画
+    $('.section1 button:nth-child(1)').click(() => {
+        $box1.show() // 显示元素 原理是设置元素的display属性
     })
-    $btn2.on('click', () => {
-        $box.show() // 调用show函数，显示元素
+    $('.section1 button:nth-child(2)').click(() => {
+        $box1.hide() // 隐藏元素
     })
-    $btn3.on('click', () => {
-        $box.toggle() // 调用toggle函数，让元素在隐藏和显示之间来回切换
+    $('.section1 button:nth-child(3)').click(() => {
+        $box1.toggle() // 开关元素
     })
-    $btn4.on('click', () => {
-        $box.fadeOut() // 调用fadeOut函数，渐出元素
+
+    // 自定义动画
+    $('.section2 button:nth-child(1)').click(() => {
+        // 自定义动画
+        // 第一个参数：要播放的动画属性，有些属性无法生效例如：transform background-color 等
+        $box2.animate({
+            marginLeft: '200px',
+            height: '150px',
+            backgroundColor: 'blue',
+            transform: 'rotate(45deg)'
+        }, 2000, 'linear', () => {
+            console.log('animate done')
+        })
     })
-    $btn5.on('click', () => {
-        $box.fadeIn() // 调用fadeIn函数，渐入元素
+
+    // 渐变动画
+    $('.section3 button:nth-child(1)').click(() => {
+        // 渐变函数的第一个参数，可以指定动画播放的时长，单位是毫秒
+        $box3.fadeIn(5000) // 元素渐入
     })
-    $btn6.on('click', () => {
-        $box.fadeToggle() // 调用fadeToggle函数，进入渐出的开关
+    $('.section3 button:nth-child(2)').click(() => {
+        $box3.fadeOut() // 元素渐出
+    })
+    $('.section3 button:nth-child(3)').click(() => {
+        // 第一个参数：动画播放时长
+        // 第二个参数：目标透明度
+        $box3.fadeTo(1000, 0.5) // 渐变到指定透明度
+    })
+    $('.section3 button:nth-child(4)').click(() => {
+        $box3.fadeToggle() // 开关渐变
+    })
+
+    // 滑动动画
+    $('.section4 button:nth-child(1)').click(() => {
+        $box4.slideDown(2000) // 滑下
+    })
+    $('.section4 button:nth-child(2)').click(() => {
+        $box4.slideUp(5000) // 滑上
+    })
+    $('.section4 button:nth-child(3)').click(() => {
+        $box4.slideToggle() // 滑动开关
     })
 </script>
 
