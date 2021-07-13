@@ -37,6 +37,18 @@
     <video width="600" autoplay muted>
         <source src="./video/oceans.mp4" />
     </video>
+
+    <div>
+        <!-- 图片：可以根据不同的媒体查询结果来显示不同图片 -->
+        <picture>
+            <!-- source 标签中有多个待选项时，使用srcset规定资源路径 -->
+            <!-- media 设置媒体查询 -->
+            <source srcset="./h5宣传页/img/bgmBtn.svg" media="(min-width: 1024px)">
+            <source srcset="./h5宣传页/img/trig.png" media="(min-width: 512px)">
+            <!-- picture 中 必须存在一个 img 标签 -->
+            <img src="./h5宣传页/img/human.png" alt=""/>
+        </picture>
+    </div>
 </body>
 
 <script>
