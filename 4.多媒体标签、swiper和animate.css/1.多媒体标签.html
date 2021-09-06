@@ -11,15 +11,37 @@
 <body>
     <!-- 产看媒体标签的方法： https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement -->
     <!-- 参考 https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video -->
-    <!-- controls 代表控制视频播放的控制器 -->
-    <!-- source 代表视频源 -->
+    
+    <!-- 属性
+        width 标签宽度
+        height 标签高度
+        controls 控制面板
+        muted 静音
+        autoplay 自动播放
+        src 媒体源
+        preload 预载模式
+        loop 循环
+        poster 海报
+    -->
     <video width="600" controls>
+        <!-- source 代表视频源 -->
         <source src="./video/oceans.mp4" />
     </video>
 
     <!-- https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio -->
-    <!-- src 代表音频源 -->
-    <audio src="./audio/a4.mp3"></audio>
+    <!-- 音频播放器 -->
+    <!-- 由于audio和video都属于HTMLMediaElement的实例
+        所以audio的所有使用方法和video一样
+        可以通过 instanceof 来判断一个对象是否是某个类型的实例
+        video instanceof HTMLMediaElement
+    -->
+    <audio class="audio" controls>
+        <!-- source 标签若有多个，那么浏览器会从上至下加载直到某一个被加载成功为止 -->
+        <source src="./audio/a4.mp3">
+        <source src="./audio/b4.mp3">
+        <source src="./audio/c4.mp3">
+        I'm sorry; your browser doesn't support HTML5 video.
+    </audio>
 
     <!-- 自定义控制器 -->
     <div>
@@ -43,10 +65,11 @@
         <picture>
             <!-- source 标签中有多个待选项时，使用srcset规定资源路径 -->
             <!-- media 设置媒体查询 -->
+            <!-- 媒体查询的顺序由大到小 -->
             <source srcset="./h5宣传页/img/bgmBtn.svg" media="(min-width: 1024px)">
             <source srcset="./h5宣传页/img/trig.png" media="(min-width: 512px)">
             <!-- picture 中 必须存在一个 img 标签 -->
-            <img src="./h5宣传页/img/human.png" alt=""/>
+            <img src="./h5宣传页/img/human.png" alt="" />
         </picture>
     </div>
 </body>

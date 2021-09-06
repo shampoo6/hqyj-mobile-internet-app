@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .box {
+            width: 100px;
+            height: 150px;
+            padding: 50px;
+            background-color: red;
+
+            border: 50px solid black;
+
+            position: absolute;
+            top: 50px;
+            left: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+<script src="js/jquery.js"></script>
+<script>
+    let $box = $('.box');
+    // 读取宽高
+    console.log($box.width())
+    console.log($box.height())
+    // 读取包含内边距的宽高
+    console.log($box.innerWidth())
+    console.log($box.innerHeight())
+    // 读取包含边框的宽度
+    console.log($box.outerWidth())
+    console.log($box.outerHeight())
+
+    // 赋值
+    // 调用以上函数，在参数处给予对应的值就可以了
+    $box.width(300)
+    $box.innerWidth(300)
+    $box.outerWidth(300)
+
+
+
+    // position
+    // offset
+</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .content {
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content"></div>
+</body>
+<script src="js/jquery.js"></script>
+<script>
+    let html = document.querySelector('html')
+    // 可以通过 html.scrollTop html.scrollLeft 属性读取或设置滚动条的位置
+    console.log($(html).scrollTop()) // 读取滚动条位置
+    $(html).scrollTop(500) // 设置滚动条位置
+</script>
+</html>

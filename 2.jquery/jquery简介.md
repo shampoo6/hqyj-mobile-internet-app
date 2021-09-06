@@ -19,6 +19,8 @@ jquery可以充当发起网络请求的客户端工具
 ## 安装
 在官网上点击download进行下载
 
+cdn: 共享资源节点
+
 ## 在页面中的使用
 ```html
 <!DOCTYPE html>
