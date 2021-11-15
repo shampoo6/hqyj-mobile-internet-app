@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				background: #DBDBDB;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="" width="300" height="300"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script>
+		var context = $('canvas')[0].getContext('2d')
+		
+		var img = new Image()
+		img.src = 'img/an2.jpg'
+		img.onload = function(){
+//			(图片对象，位置x，位置y，截取区域的宽，截取区域的高，画布位置x，画布位置y，宽，高)
+			context.drawImage(img,230,40,650,550,100,100,100,100)
+		}
+	</script>
+</html>

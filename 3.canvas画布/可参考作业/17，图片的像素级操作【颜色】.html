@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				background: #DBDBDB;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="" width="220" height="140"></canvas>
+		<br />
+		<button>黑白</button>
+		<button>反转</button>
+		<button>灰度</button>
+		<br />
+		<canvas id="" width="220" height="140"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+		var context1 = $('canvas')[0].getContext('2d')
+		var context2 = $('canvas')[1].getContext('2d')
+
+		var img = new Image()
+		img.src = 'img/an4.jpg'
+		img.onload = function(){
+			context1.drawImage(img,0,0,img.width,img.height,0,0,220,140)
+		}
+		
+		$('button').eq(0).click(function(){
+			var	d = context1.getImageData(0,0,img.width,img.height)
+//			console.log(d.data)
+			var dData = d.data
+			// 代码错误：循环时应使用 i+=4 而不是 i++
+			for(var i=0;i<dData.length;i++){
+				var r =  dData[i*4]
+				var g =  dData[i*4+1]
+				var b = dData[i*4+2]
+				var color = (r+g+b)/3
+				if(color>127){
+					color = 255
+				}else{
+					color = 0
+				}
+				dData[i*4]=dData[i*4+1]=dData[i*4+2] = color
+			}
+			context2.putImageData(d,0,0)
+		})
+		
+		$('button').eq(1).click(function(){
+			var	d = context1.getImageData(0,0,img.width,img.height)
+//			console.log(d.data)
+			var dData = d.data
+			for(var i=0;i<dData.length;i++){
+				dData[i*4] = 255 - dData[i*4]
+				dData[i*4+1] = 255 - dData[i*4+1]
+				dData[i*4+2] = 255 - dData[i*4+2]
+			}
+			context2.putImageData(d,0,0)
+		})
+		
+//		灰度图公式：R*0.299 + G*0.587 + B*0.114
+		$('button').eq(2).click(function(){
+			var	d = context1.getImageData(0,0,img.width,img.height)
+//			console.log(d.data)
+			var dData = d.data
+			for(var i=0;i<dData.length;i++){
+				// let g = dData[i*4]*0.299 + dData[i*4+1]*0.587 + dData[i*4+2]*0.114
+				// console.log(g);
+				dData[i*4] = dData[i*4]*0.299
+				dData[i*4+1] = dData[i*4+1]*0.587
+				dData[i*4+2] = dData[i*4+2]*0.114
+			}
+			context2.putImageData(d,0,0)
+		})
+	</script>
+</html>

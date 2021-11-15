@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <canvas width="375" height="603"></canvas>
+        <div class="cover">
+            <img src="./img/cover_bg.jpg" />
+            <img src="./img/title_bg.gif" />
+            <img src="./img/title.gif" />
+        </div>
+        <div class="btn"></div>
+    </div>
+    <img class="p1" style="display: none;" src="./img/1.jpg" />
+</body>
+<script src="./js/main.js"></script>
+<script>
+    // 获取元素
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+    const cover = document.querySelector('.cover')
+    const btn = document.querySelector('.btn')
+    const p1 = document.querySelector('.p1')
+
+    function init() {
+
+        // 初始化画布和图片大小
+        canvas.width = canvasWidth
+        canvas.height = canvasHeight
+        // 修改底图大小
+        const imgs = document.querySelectorAll('.cover>img')
+        for (const img of imgs) {
+            img.style.width = canvas.width + 'px'
+            img.style.height = canvas.height + 'px'
+        }
+
+        // 延迟一段时间显示按钮
+        setTimeout(() => {
+            btn.style.opacity = 1
+            // 声明并绑定事件
+            const onTransitionEnd = () => {
+                console.log('end');
+                btn.removeEventListener('transitionend', onTransitionEnd)
+                btn.addEventListener('mousedown', onMDown)
+                btn.addEventListener('mouseup', onMUp)
+
+                // 删除起始封面图
+                cover.remove()
+                // 将图片绘制到canvas
+                ctx.drawImage(p1, 0, 0, 750, 1206, 0, 0, canvasWidth, canvasHeight)
+            }
+            const onMDown = () => {
+                console.log('down');
+            }
+            const onMUp = () => {
+                console.log('up');
+            }
+            btn.addEventListener('transitionend', onTransitionEnd)
+        }, btnDelayTime)
+
+    }
+
+    init()
+</script>
+
+</html>

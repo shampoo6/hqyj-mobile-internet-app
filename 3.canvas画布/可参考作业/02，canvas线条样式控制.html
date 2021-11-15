@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#cont{
+				/*width: 200px;
+				height: 200px;*/
+				background: salmon;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cont" width="300px" height="300px"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+		var oC = $('#cont')[0]  //jquery获取的是jquery对象，通过【0】将其转换成dom对象
+		var context = oC.getContext('2d')
+		
+		context.moveTo(100,100);  //设置绘制起始点
+		context.lineTo(200,200);  //绘制目标点
+		
+		context.strokeStyle = 'red'  //颜色
+		context.lineWidth = '30'   //宽度
+		context.lineCap = 'round'    //线冒
+		
+		context.stroke();     //绘制线条
+
+	</script>
+</html>

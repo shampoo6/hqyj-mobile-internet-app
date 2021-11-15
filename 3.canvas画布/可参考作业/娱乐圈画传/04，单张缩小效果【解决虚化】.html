@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				background: #DBDBDB;
+			}
+			#btn{
+				width: 80px;
+				height: 80px;
+				/*border: 1px solid red;*/
+				position: fixed;
+				bottom: 20px;
+				left: 50%;
+				margin-left: -40px;
+				background: url(img/cover.png) 0px 0px/642px 1246px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="300" height="300"></canvas>
+		<div id="btn"></div>
+	</body>
+	<script type="text/javascript" src="js/myQuery.js" ></script>
+	<script type="text/javascript" src="js/imgData.js" ></script>
+	<script type="text/javascript">
+		
+		var oC = $('canvas')
+		var context = oC.getContext('2d')
+		
+		var screenW = document.body.offsetWidth
+		var screenH = document.body.offsetHeight
+		
+		oC.width = screenW
+		oC.height = screenH
+		
+		var n = 1
+		
+		var img = new Image()
+		var smImg = new Image()
+		
+		img.src = imgArr[n].imgUrl
+		smImg.src = imgArr[n-1].imgUrl
+		img.onload = function(){
+			context.drawImage(img,imgArr[n].x,imgArr[n].y,imgArr[n].w,imgArr[n].h,0,0,oC.width,oC.height)
+		}
+		
+//		点击使得图像的截取的坐标，截取的宽高发生变化
+//		假设每次x截取5，则y,w,h的换算关系是：
+//		num = 5
+//		num/870 = y/420                      y = 420*（num/870）
+//		num/870 =  w/(1875-300)              w = (1875-300)*(num/870)
+//		num/870 =  h/(3015-460)              w = (3015-460)*(num/870)
+		var num = 5
+		
+		var timer = null
+		$('btn').onmousedown = function(){
+			timer = setInterval(function(){
+//				【1】截取大图中的一部分进行绘制
+//				var sX = imgArr[n].x - num;
+//				var sY = imgArr[n].y - imgArr[n].y*(num / imgArr[n].x);
+//				var sW = imgArr[n].w + (1875-imgArr[n].w)*(num / imgArr[n].x);
+//				var sH = imgArr[n].h + (3015-imgArr[n].h)*(num / imgArr[n].x);
+//				context.drawImage(img,sX,sY,sW,sH,0,0,oC.width,oC.height);
+//				
+//				【2】在已经绘制的大图虚化区域，盖住虚化的小图
+				
+//				var smX = screenW/sW * num;
+//				var smY = screenH/sH * imgArr[n].y*(num / imgArr[n].x);
+//				var smW = screenW/sW * imgArr[n].w;
+//				var smH = screenH/sH * imgArr[n].h;
+//				
+//				context.drawImage(smImg,0,0,smImg.width,smImg.height,smX,smY,smW,smH);
+//				
+				
+				var x1 = imgArr[n].x - num
+				var y1 = imgArr[n].y - imgArr[n].y*(num/imgArr[n].x)
+				var w1 = imgArr[n].w + (1875-imgArr[n].w)*(num/imgArr[n].x)
+				var h1 = imgArr[n].h + (3015-imgArr[n].h)*(num/imgArr[n].x)
+				context.drawImage(img,x1,y1,w1,h1,0,0,oC.width,oC.height)
+			
+//				解决图像虚化：
+				var smX = screenW/w1 * num
+				var smY = screenH/h1 * (imgArr[n].y*num/imgArr[n].x)
+//				图像尺寸与屏幕尺寸 和 截取的大图像尺寸与截取的小图像尺寸 成比例关系
+//				大图截取的尺寸是根据屏幕计算，小图截取的尺寸是根据图像原尺寸计算
+				var smW = screenW/w1 * imgArr[n].w
+				var smH = screenH/h1 * imgArr[n].h
+				context.drawImage(smImg,0,0,smImg.width,smImg.height,smX,smY,smW,smH)
+				
+				if(x1<=0){
+					n++
+					num = 5
+					img.src = imgArr[n].imgUrl
+					smImg.src = imgArr[n-1].imgUrl;
+				}else{
+					num +=5
+				}
+			},10)
+		}
+		$('btn').onmouseup = function(){
+			clearInterval(timer)
+		}
+		
+	</script>
+</html>

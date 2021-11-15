@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				background: #DBDBDB;
+			}
+			#btn{
+				width: 80px;
+				height: 80px;
+				/*border: 1px solid red;*/
+				position: fixed;
+				bottom: 20px;
+				left: 50%;
+				margin-left: -40px;
+				background: url(img/cover.png) 0px 0px/642px 1246px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="300" height="300"></canvas>
+		<div id="btn"></div>
+	</body>
+	<script type="text/javascript" src="js/myQuery.js" ></script>
+	<script type="text/javascript">
+		var oC = $('canvas')
+		var context = oC.getContext('2d')
+		oC.width = document.body.offsetWidth
+		oC.height = document.body.offsetHeight
+		
+		var img = new Image()
+		img.src = 'img/4.jpg'
+		img.onload = function(){
+			context.drawImage(img,870,420,300,460,0,0,oC.width,oC.height)
+		}
+		
+//		点击使得图像的截取的坐标，截取的宽高发生变化
+//		假设每次x截取5，则y,w,h的换算关系是：
+//		num = 5
+//		num/870 = y/420                      y = 420*（num/870）
+//		num/870 =  w/(1875-300)              w = (1875-300)*(num/870)
+//		num/870 =  h/(3015-460)              w = (3015-460)*(num/870)
+		var x1,y1,w1,h1
+		var num = 5
+		var timer = null
+		$('btn').onmousedown = function(){
+			timer = setInterval(function(){
+				x1 = 870 - num
+				y1 = 420 - 420*num/870
+				w1 = 300 + (1875-300)*(num/870)
+				h1 = 460 + (3015-460)*(num/870)
+				context.drawImage(img,x1,y1,w1,h1,0,0,oC.width,oC.height)
+				num +=5
+			},50)
+		}
+		$('btn').onmouseup = function(){
+			clearInterval(timer)
+		}
+		
+	</script>
+</html>

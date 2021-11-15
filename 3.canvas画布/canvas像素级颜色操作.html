@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas class="src" width="220" height="140"></canvas>
+    <br />
+    <button>黑白</button>
+    <button>反转</button>
+    <button>灰度</button>
+    <br />
+    <canvas class="target" width="220" height="140"></canvas>
+</body>
+<script>
+    const ctx1 = document.querySelector('.src').getContext('2d')
+    const ctx2 = document.querySelector('.target').getContext('2d')
+    const img = document.createElement('img')
+    img.src = './img/an2.jpg'
+    img.addEventListener('load', () => {
+        ctx1.drawImage(img, 0, 0, img.width, img.height, 0, 0, 220, 140)
+    })
+
+    const btn1 = document.querySelector('button:nth-of-type(1)')
+    const btn2 = document.querySelector('button:nth-of-type(2)')
+    const btn3 = document.querySelector('button:nth-of-type(3)')
+
+    // 黑白图
+    btn1.addEventListener('click', () => {
+        // 读取图片数据
+        const id = ctx1.getImageData(0, 0, img.width, img.height)
+        const idData = id.data
+        const half = 255 * 0.5
+        let g = 0
+        for (let i = 0; i < idData.length; i += 4) {
+            // 计算灰度
+            // 灰度公式：g = r*0.299 + g*0.587 + b*0.114
+            g = (idData[i] * 299 + idData[i + 1] * 587 + idData[i + 2] * 114) * 0.001
+            if (g > half) {
+                // 灰度过半说明亮度足够，则颜色为白色
+                idData[i] = 255
+                idData[i + 1] = 255
+                idData[i + 2] = 255
+            } else {
+                // 灰度不足说明亮度不够，则颜色为黑色
+                idData[i] = 0
+                idData[i + 1] = 0
+                idData[i + 2] = 0
+            }
+        }
+        ctx2.putImageData(id, 0, 0)
+    })
+    // 反转色
+    btn2.addEventListener('click', () => {
+        const id = ctx1.getImageData(0, 0, img.width, img.height)
+        const idData = id.data
+        for (let i = 0; i < idData.length; i += 4) {
+            idData[i] = 255 - idData[i]
+            idData[i + 1] = 255 - idData[i + 1]
+            idData[i + 2] = 255 - idData[i + 2]
+        }
+        ctx2.putImageData(id, 0, 0)
+    })
+    // 灰度图
+    btn3.addEventListener('click', () => {
+        const id = ctx1.getImageData(0, 0, img.width, img.height)
+        const idData = id.data
+        let g = 0
+        for (let i = 0; i < idData.length; i += 4) {
+            /*灰度处理：求r，g，b的均值，并赋回给r，g，b*/
+            g = (idData[i] * 299 + idData[i + 1] * 587 + idData[i + 2] * 114) * 0.001
+            idData[i] = g
+            idData[i + 1] = g
+            idData[i + 2] = g
+        }
+        ctx2.putImageData(id, 0, 0)
+    })
+</script>
+
+</html>

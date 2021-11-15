@@ -1,0 +1,31 @@
+@import url(./ui.css);
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    position: relative;
+}
+
+canvas {
+    border: 1px solid black;
+}
+
+.cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cover>img {
+    width: 375px;
+    height: 603px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

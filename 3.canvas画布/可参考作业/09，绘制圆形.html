@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#cont{
+				/*width: 200px;
+				height: 200px;*/
+				background: salmon;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cont" width="300px" height="300px"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+
+		var oC = $('#cont')[0]  //jquery获取的是jquery对象，通过【0】将其转换成dom对象
+		var context = oC.getContext('2d')
+		
+//		绘制圆形  （圆心x，圆心y，半径，起始角度，目标角度,方向：true为逆时针）
+		context.arc(150,150,50,0,Math.PI/2,false)
+		context.stroke()
+		
+//		绘制扇形
+		context.beginPath()
+		context.moveTo(150,150)
+		context.arc(150,150,50,0,Math.PI/2,false)
+		context.stroke()
+		context.closePath()
+		
+		context.beginPath()
+		context.moveTo(150,150)
+		context.arc(150,150,50,Math.PI/2,Math.PI,false)
+		context.stroke()
+		context.closePath()
+		
+		context.beginPath()
+		context.moveTo(150,150)
+		context.arc(150,150,50,Math.PI,Math.PI/2*3,false)
+		context.stroke()
+		context.closePath()
+		
+		context.beginPath()
+		context.moveTo(150,150)
+		context.arc(150,150,50,Math.PI/2*3,0,false)
+		context.stroke()
+		context.closePath()
+	</script>
+</html>

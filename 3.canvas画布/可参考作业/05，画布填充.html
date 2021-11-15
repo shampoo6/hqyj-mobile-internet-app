@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#cont{
+				/*width: 200px;
+				height: 200px;*/
+				background: salmon;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cont" width="300px" height="300px"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+		var oC = $('#cont')[0]  //jquery获取的是jquery对象，通过【0】将其转换成dom对象
+		var context = oC.getContext('2d')
+		
+//		封闭空间是context.beginPath()和context.closePath()把线条包裹起来
+		context.beginPath()
+			context.moveTo(50,50);  //设置绘制起始点
+			context.lineTo(150,50);  //绘制目标点
+			context.lineTo(100,100);  //绘制目标点		
+			context.lineTo(50,50);  //绘制目标点
+			context.fillStyle = 'red'
+			context.fill()
+		context.closePath()
+		
+		context.beginPath()
+			context.moveTo(50,50);  //设置绘制起始点
+			context.lineTo(100,50);  //绘制目标点
+			context.lineTo(100,100);  //绘制目标点		
+			context.lineTo(50,50);  //绘制目标点
+			context.fillStyle = 'green'
+			context.fill()
+		context.closePath()
+		
+//		观察通过内部样式和行内样式两种添加样式的不同效果
+//		总结：使用内部样式会导致线条位置不准，推荐使用行内样式
+	</script>
+</html>

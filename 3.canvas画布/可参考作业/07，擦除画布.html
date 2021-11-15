@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#cont{
+				/*width: 200px;
+				height: 200px;*/
+				background: salmon;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cont" width="300px" height="300px"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+		var oC = $('#cont')[0]  //jquery获取的是jquery对象，通过【0】将其转换成dom对象
+		var context = oC.getContext('2d')
+		
+//		绘制实心矩形
+		context.rect(50,50,100,100)
+		context.fillStyle = 'orangered'
+		context.fill()
+		
+		context.clearRect(50,50,50,50)
+
+
+	</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				background: #dbdbdb;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="" width="300px" height="300px"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+		var context = $('canvas')[0].getContext('2d')
+		context.beginPath()
+		for (var i=0;i<60;i++) {
+			debugger
+			context.moveTo(150,150)
+			context.arc(150,150,100,(Math.PI/30)*i,(Math.PI/30)*(i+1),false)
+			context.stroke()
+		}
+		context.closePath()
+		
+		context.beginPath()
+		context.arc(150,150,90,0,Math.PI*2,false)
+		context.fillStyle = '#dbdbdb'
+		context.fill()
+		context.closePath()
+	</script>
+</html>

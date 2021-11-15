@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#canvas{
+				background: skyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="300px" height="300px">  </canvas>
+	</body>
+	<script type="text/javascript">
+		var oCont = document.getElementById('canvas')
+		var context = oCont.getContext('2d')   //获取画布空间
+		
+//		画布文字（描边文字）
+		// context.beginPath()
+		context.font = '40px 楷体'
+		context.strokeStyle = 'green'
+		
+		//注意，设置基线要在设置文字内容和位置之前，否则设置基线失效
+//		top:顶部对齐      hanging:悬挂(和top像，但缺少缝隙)
+		context.textBaseline = 'top'
+		context.strokeText('你好',0,0)   //执行文字的绘图
+		// context.closePath()
+		
+//		画布文字（填充文字）
+//		context.beginPath()
+//		context.font = '40px 楷体'
+//		context.fillStyle = 'green'
+//		
+//		//注意，设置基线要在设置文字内容和位置之前，否则设置基线失效
+////		top:顶部对齐      hanging:悬挂(和top像，但缺少缝隙)
+//		context.textBaseline = 'top'
+//		context.fillText('你好',0,0)
+//		
+//		context.closePath()
+		
+	</script>
+</html>

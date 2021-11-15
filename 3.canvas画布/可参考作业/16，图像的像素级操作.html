@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				background: #DBDBDB;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="" width="220" height="140"></canvas>
+		<br />
+		<button>按钮</button>
+		<br />
+		<canvas id="" width="220" height="140"></canvas>
+		<br />
+		<canvas id="" width="220" height="140"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+		var context1 = $('canvas')[0].getContext('2d')
+		var context2 = $('canvas')[1].getContext('2d')
+		var context3 = $('canvas')[2].getContext('2d')
+
+		var img = new Image()
+		img.src = 'img/an4.jpg'
+		img.onload = function(){
+			context1.drawImage(img,0,0,img.width,img.height,0,0,220,140)
+		}
+		
+		$('button').click(function(){
+			var	d = context1.getImageData(50,50,100,100)
+//			console.log(d.data.length)
+			context2.putImageData(d,0,0)
+			context3.putImageData(d,0,0,20,20,30,30)
+		})
+		
+	</script>
+</html>

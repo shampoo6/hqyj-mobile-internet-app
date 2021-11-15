@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				background: #DBDBDB;
+			}
+		</style>
+	</head>
+	<body>
+		<button>+</button>
+		<button>-</button>
+		<select name="">
+			<option value="black">黑色</option>
+			<option value="blue">蓝色</option>
+			<option value="red">红色</option>
+		</select>
+		<button>擦除画布</button>
+		<canvas id="" width="300" height="500"></canvas>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+	<script type="text/javascript">
+		var context = $('canvas')[0].getContext('2d')
+		var col = 'black'
+		var wid = 1
+		var state = true
+		$('button').eq(0).click(function(){
+			wid += 2
+			if(wid>=20){
+				wid = 20
+			}
+		})
+		$('button').eq(1).click(function(){
+			wid -= 2
+			if(wid<=1){
+				wid = 1
+			}
+		})
+		$('button').eq(2).click(function(){
+			state = !state
+		})
+		$(document).mousedown(function(ev){
+			col = $('select').val()
+			var screenW = $('canvas').offset().left
+			var screenH = $('canvas').offset().top
+			var beginX = ev.clientX - screenW
+			var beginY = ev.clientY - screenH
+			context.beginPath()
+			context.moveTo(beginX,beginY)
+			$(document).mousemove(function(ev){
+				var targetX = ev.clientX - screenW
+				var targetY = ev.clientY - screenH
+				context.lineTo(targetX,targetY)
+				context.strokeStyle = col
+				context.lineWidth = wid
+				if (state) {
+					context.stroke()
+				} else{
+					context.clearRect(targetX-5,targetY-5,10,10)
+				}
+			})
+			$(document).mouseup(function(){
+				$(document).off('mousemove')
+				context.closePath()
+			})
+		})
+		
+	</script>
+</html>

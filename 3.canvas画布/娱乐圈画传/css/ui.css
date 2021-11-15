@@ -1,0 +1,18 @@
+.btn {
+    width: 128px;
+    height: 130px;
+    background-image: url(../img/cover.png);
+    background-position-x: 330px;
+    transform: scale(0.5);
+
+    position: absolute;
+    bottom: -18px;
+    left: calc(50% - 64px);
+
+    opacity: 0;
+    transition: opacity 1s linear;
+}
+
+.btn.active {
+    background-position-x: 190px;
+}
