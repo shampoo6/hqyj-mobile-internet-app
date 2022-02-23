@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+
+            transition: all 3s linear;
+        }
+
+        .box.active {
+            transform: translateY(100px);
+        }
+    </style>
+</head>
+
+<body>
+    <button>播放</button>
+    <div class="box"></div>
+</body>
+<script>
+    const btn = document.querySelector('button')
+    const box = document.querySelector('.box')
+
+    // 声明一个 flag 用于判断按钮是否可以点击
+    let lock = false
+
+    btn.addEventListener('click', () => {
+        if (lock) return // 若按钮被点击过一次，那么lock就不能再被点击了
+
+        lock = true
+        // classList.contains(<className>): boolean
+        // 判断是否包含某个类名, 返回bool值, true 代表包含此类名
+        if (box.classList.contains('active')) {
+            box.classList.remove('active')
+        } else {
+            box.classList.add('active')
+        }
+    })
+
+    // 参考：
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/transitionrun_event
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/transitionstart_event
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/transitionend_event
+    // 给要播放动画的元素添加过渡事件
+    // transitionend 过度动画播放完成事件
+    box.addEventListener('transitionend', () => {
+        // 解锁按钮
+        lock = false
+    })
+
+</script>
+
+</html>
